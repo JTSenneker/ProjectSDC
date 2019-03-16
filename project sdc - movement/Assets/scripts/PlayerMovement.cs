@@ -26,6 +26,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
+            if (PlayerManager.hasHologramUpgrade)
+            {
+                print("I have the hologram");
+            }
             if (crouch == false)
             {
                 crouch = true;
