@@ -1,20 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class UpdateText : MonoBehaviour
+public class HurtPlayer : MonoBehaviour
 {
-    Text text;
     PlayerStats playerStats;
-
     void Start()
     {
         playerStats = GameObject.Find("player").GetComponent<PlayerStats>();
-        text = GetComponent<Text>();
     }
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
-        text.text = playerStats.energy.ToString();
+        if(other.gameObject.CompareTag("Player"))
+        {
+            playerStats.HurtPlayer();
+        }
     }
 }

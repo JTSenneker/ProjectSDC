@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    PlayerStats playerStats;
+    UpgradeList upgradeList;
     Vector3 movement;
     public float rotate;
     public float walkSpeed;
     public float runSpeed;
-    public float crouchspeed;
-    public float energydepletion;
+    public float crouchSpeed;
+    public float energyDepletion;
     private float currentSpeed;
+    public float fatigueSpeed;
     private Rigidbody rb;
     private Quaternion Quat;
     private bool crouch = false;
-    public bool running;
+    private bool running = false;
     
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         currentSpeed = walkSpeed;
-        GetComponent<Stamina>();
+        playerStats = GetComponent<PlayerStats>();
+        upgradeList = GetComponent<UpgradeList>();
     }
     void Update()
     {
+        if(Input.GetKeyDown("r"))
+        {
+            upgradeList.upgrades[0].useUpgrade();
+        }
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (crouch == false)
@@ -38,30 +46,38 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (Input.GetKey("a")||Input.GetKey("s")||Input.GetKey("d")||Input.GetKey("w"))
-        {
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
-            move(h, v);
-            currentSpeed = walkSpeed;
-        }
+            if (Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") || Input.GetKey("w"))
+            {
+                float h = Input.GetAxisRaw("Horizontal");
+                float v = Input.GetAxisRaw("Vertical");
+                move(h, v);
+                currentSpeed = walkSpeed;
+            }
         running = false;
     }
     void move(float h,float v)
     {
-        if(crouch)
+        if (playerStats.energy >= 30)
         {
-            currentSpeed = crouchspeed;
-        }
-        if (Input.GetKey(KeyCode.LeftShift)&&Stamina.energy > Stamina.lowestenergy && crouch == false)
-        {
-            running = true;
-            currentSpeed = runSpeed;
-            Stamina.energy -= energydepletion*Time.deltaTime;
-            if(Stamina.energy<30)
+            if (crouch)
             {
-                Stamina.energy = 30;
+                currentSpeed = crouchSpeed;
             }
+            if (Input.GetKey(KeyCode.LeftShift) && playerStats.energy > playerStats.lowestenergy && crouch == false)
+            {
+                playerStats.TimerReset();
+                running = true;
+                currentSpeed = runSpeed;
+                playerStats.energy -= energyDepletion * Time.deltaTime;
+                if (playerStats.energy < 30)
+                {
+                    playerStats.energy = 30;
+                }
+            }
+        }
+        else
+        {
+            currentSpeed = fatigueSpeed;
         }
         movement.Set(h, 0f, v);
         movement = movement.normalized * currentSpeed * Time.deltaTime;
