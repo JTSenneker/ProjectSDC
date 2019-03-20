@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,15 +16,20 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion Quat;
     private bool crouch = false;
     public bool running;
+    private Stamina stamina;
+    private float CurrentStamina;
+    public float MaxStamina = 100.0f;
     
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         currentSpeed = walkSpeed;
-        GetComponent<Stamina>();
+       stamina = GetComponent<Stamina>();
+        CurrentStamina = MaxStamina;
     }
     void Update()
     {
+        GameObject.FindObjectOfType<UIManager>().UpdateStaminaBar(CurrentStamina, MaxStamina);
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (crouch == false)
@@ -53,12 +59,12 @@ public class PlayerMovement : MonoBehaviour
         {
             currentSpeed = crouchspeed;
         }
-        if (Input.GetKey(KeyCode.LeftShift)&&Stamina.energy > Stamina.lowestenergy && crouch == false)
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             running = true;
             currentSpeed = runSpeed;
-            Stamina.energy -= energydepletion*Time.deltaTime;
-            if(Stamina.energy<30)
+            CurrentStamina -= energydepletion * Time.deltaTime;
+            if(Stamina.energy < 30)
             {
                 Stamina.energy = 30;
             }
@@ -69,4 +75,9 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(movement),rotate);
         transform.Translate(movement * currentSpeed * Time.deltaTime, Space.World);
     }
+    
+
+    
+
 }
+
