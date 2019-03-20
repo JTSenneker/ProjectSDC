@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ShieldUpgrade : Upgrade
 {
-    public override void useUpgrade()
+    public override void UseUpgrade()
     {
-        base.useUpgrade();
+        base.UseUpgrade();
         if (PlayerManager.hasShield)
         {
-            Debug.Log("you did it");
+            Debug.Log("shield");
         }
     }
 }

@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKeyDown("r"))
         {
-            upgradeList.upgrades[0].useUpgrade();
+            upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade();
         }
         if (Input.GetKeyDown(KeyCode.C))
         {

@@ -8,12 +8,16 @@ public class UpgradeList : MonoBehaviour
     public List<Upgrade> upgrades = new List<Upgrade>();
     
     private int upgradeCount;
-    private int currentUpgrade;
+    public int currentUpgrade;
     string[] yourUpgrades = new string[5];
     Text text;
     void Start()
     {
         upgrades.Add(new ShieldUpgrade());
+        upgrades.Add(new HologramUpgrade());
+        upgrades.Add(new InvisibilityUpgrade());
+        upgrades.Add(new ExplodingTaserUpgrade());
+        upgrades.Add(new TaserUpgrade());
         text = GameObject.Find("Upgrades").GetComponent<Text>();
         Upgrades.Add("Shield", PlayerManager.hasShield);
         Upgrades.Add("Hologram", PlayerManager.hasHologram);
@@ -42,10 +46,6 @@ public class UpgradeList : MonoBehaviour
                 currentUpgrade = 0;
             }
             text.text = yourUpgrades[currentUpgrade];
-            if(Input.GetKeyDown(KeyCode.F))
-            {
-
-            }
         }
     }
 }
