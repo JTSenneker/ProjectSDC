@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 public class PlaceHolderButtonScript : MonoBehaviour
 {
     public string testingarea;
+    public string Garbage;
 
- public void Playvidya()
-    {
-        Time.timeScale = 1.00f;
-        SceneManager.LoadScene(testingarea);
-    }
+
+
 }
+
+
+
