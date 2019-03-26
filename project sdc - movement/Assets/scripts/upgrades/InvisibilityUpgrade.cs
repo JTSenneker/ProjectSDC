@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class InvisibilityUpgrade : Upgrade
 {
-    public override void UseUpgrade()
+    public override void UseUpgrade(bool active)
     {
-        base.UseUpgrade();
+        base.UseUpgrade(active);
         if (PlayerManager.hasInvisibilityCloak)
         {
             Debug.Log("invisibility cloak");

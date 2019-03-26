@@ -18,9 +18,11 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion Quat;
     private bool crouch = false;
     private bool running = false;
+    public bool active;
     
     void Start()
     {
+        active = false;
         rb = GetComponent<Rigidbody>();
         currentSpeed = walkSpeed;
         playerStats = GetComponent<PlayerStats>();
@@ -30,7 +32,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKeyDown("r"))
         {
-            upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade();
+            active = !active;
+            upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(active);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {

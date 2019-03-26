@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TaserUpgrade : Upgrade
 {
-    public override void UseUpgrade()
+    public override void UseUpgrade(bool active)
     {
-        base.UseUpgrade();
+        base.UseUpgrade(active);
         if (PlayerManager.hasTaser)
         {
             Debug.Log("taser");
