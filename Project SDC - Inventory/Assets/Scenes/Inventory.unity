@@ -424,7 +424,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sold: 0
-  displayTime: 0
   playerMoney: {fileID: 439192883}
   playerTreasure: {fileID: 704276175}
   inventoryMiscText: {fileID: 259162592}
@@ -706,7 +705,7 @@ GameObject:
   - component: {fileID: 347548182}
   m_Layer: 0
   m_Name: Upgrade Vendor
-  m_TagString: Upgrader
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Upgrader"))
+        if (other.gameObject.CompareTag("Shop"))
         {
             SceneManager.LoadScene(sceneName: "Shop");
         }
