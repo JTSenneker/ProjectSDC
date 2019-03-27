@@ -13,7 +13,9 @@ public class player : MonoBehaviour {
 
     private Collider B_Collider;
     private Collider C_Collider;
-
+    private bool KeyCardCheck;
+    private bool GunCheck;
+    private bool TaserCheck;
 
 
 
@@ -55,7 +57,7 @@ public class player : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Pickup" && Input.GetKeyDown("e"))
+        if (Input.GetKeyDown("e"))
         {
            
            
@@ -66,10 +68,10 @@ public class player : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Pickup"&& Input.GetKeyDown("e"))
+        if (Input.GetKeyDown("e"))
         {
             inPickUpRange = true;
-            
+            detect(other);
         }
 
     }
@@ -85,9 +87,9 @@ public class player : MonoBehaviour {
 
     void detect(Collider other)
     {
-        if (other.gameObject.tag == ("Pickup"))
+        if (other.gameObject.tag == ("Pickup") || other.gameObject.tag == ("Guard"))
         {
-            Debug.Log("pickup");
+            
             Vector3 direction = other.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
             if (angle <= fieldOfViewAngle * .5f)
@@ -99,16 +101,38 @@ public class player : MonoBehaviour {
                 if (Physics.Raycast(transform.position, direction.normalized, out hit, sightdistance))
                 {
 
-                    if (hit.collider.gameObject.tag == ("Pickup"))
+                    if (hit.collider.gameObject.tag == ("Pickup") && hit.collider.gameObject.tag != ("Guard"))
                     {
-                        Debug.Log("sight");
+                        Debug.Log("Pickup");
                         Destroy(other.gameObject);
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
-                    }
-                    else
-                    {
 
+                    }
+                    else if (hit.collider.gameObject.tag == ("Guard"))
+                    {
+                        Debug.Log("Pickpocket");
+                        KeyCardCheck = other.GetComponent<GuardnavcanChase>().hasKeycard;
+                        GunCheck = other.GetComponent<GuardnavcanChase>().hasGun;
+                        TaserCheck = other.GetComponent<GuardnavcanChase>().hasTaser;
+                        if (KeyCardCheck == true)
+                        {
+                            Debug.Log("Get KeyCard");
+                            KeyCardCheck = false;
+                        }
+                        if (GunCheck == true)
+                        {
+                            Debug.Log("Get Gun");
+                            GunCheck = false;
+                        }
+                        if (TaserCheck == true)
+                        {
+                            Debug.Log("Get Taser");
+                            TaserCheck = false;
+                        }
+                        other.GetComponent<GuardnavcanChase>().hasKeycard = KeyCardCheck;
+                        other.GetComponent<GuardnavcanChase>().hasGun = GunCheck;
+                        other.GetComponent<GuardnavcanChase>().hasTaser = TaserCheck;
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
                     }

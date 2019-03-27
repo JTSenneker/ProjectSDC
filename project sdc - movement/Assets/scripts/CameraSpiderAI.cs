@@ -15,7 +15,9 @@ public class CameraSpiderAI : MonoBehaviour
     public float waitAfterLunge;
     public float lookSway;
     public float LookAverageDir;
-
+    public float startX;
+    public float startY;  //MAKE SURE TO CHANGE THESE TO WHERE YOU WANT THIS THING TO START!!
+    public float startZ;
 
     public Vector3 LastSighting;
     private Vector3 Lungespot;
@@ -36,9 +38,9 @@ public class CameraSpiderAI : MonoBehaviour
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
         Vector3[] waypoints = new Vector3[targetWaypoints.Length];
         ischasing = false;
-        wallSpot.x = 16f;  //MAKE SURE TO CHANGE THIS TO WHERE YOU WANT THIS THING TO START
-        wallSpot.y = .5f;
-        wallSpot.z = 2;
+        wallSpot.x = startX;
+        wallSpot.y = startY;
+        wallSpot.z = startZ;
 
         Orb_Collider = GetComponent<SphereCollider>();
         B_Collider = GetComponent<BoxCollider>();

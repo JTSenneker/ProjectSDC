@@ -8,13 +8,23 @@ public class GuardnavcanChase : MonoBehaviour {
     public float speed;
     public float runspeed;
     public float waitTime;
+    public float MeleeTime;
+    public float GunTime;
+    public float TaserTime;
     public float turnSpeed;
     public float fieldOfViewAngle;
-    public float sightdistance;
+    public float shootdistance;
+    public float Meleedistance;
     public float Boxdistance;
     public Vector3 movement;
     public Transform[] targetWaypoints;
     float timer;
+    float MeleeTimer;
+    float GunTimer;
+    float TaserTimer;
+    public bool hasTaser;
+    public bool hasKeycard;
+    public bool hasGun;
 
     public Vector3 LastSighting;
     private Collider B_Collider;
@@ -191,7 +201,7 @@ public class GuardnavcanChase : MonoBehaviour {
                 RaycastHit hit;
                 C_Collider.enabled = false;
                 B_Collider.enabled = false;
-                if (Physics.Raycast(transform.position, direction.normalized, out hit, sightdistance))
+                if (Physics.Raycast(transform.position, direction.normalized, out hit, 10000f))
                 {
 
                     if (hit.collider.gameObject.tag == ("Player"))
@@ -199,6 +209,40 @@ public class GuardnavcanChase : MonoBehaviour {
                         Debug.Log("sight");
                         ischasing = true;
                         LastSighting = player.position;
+                        if (Physics.Raycast(transform.position, direction.normalized, out hit, shootdistance))
+                        {
+                            if (Physics.Raycast(transform.position, direction.normalized, out hit, Meleedistance))
+                            {
+                                MeleeTimer += Time.deltaTime;
+                                if (timer >= MeleeTime)
+                                {
+                                    MeleeTimer = 0;
+                                    Debug.Log("Melee");
+                                }
+                            }
+                            else
+                            {
+                                if (hasGun == true)
+                                {
+                                    GunTimer += Time.deltaTime;
+                                    if (timer >= GunTime)
+                                    {
+                                        GunTimer = 0;
+                                        Debug.Log("Shoot");
+                                    }
+
+                                }
+                                else if (hasTaser == true)
+                                {
+                                    TaserTimer += Time.deltaTime;
+                                    if (timer >= TaserTime)
+                                    {
+                                        TaserTimer = 0;
+                                        Debug.Log("Taser");
+                                    }
+                                }
+                            }
+                        }
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
                     }
