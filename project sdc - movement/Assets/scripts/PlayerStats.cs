@@ -21,7 +21,7 @@ public class PlayerStats : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        if (energy <= 100 && timer >= regainDelay)
+        if (energy <= 100 && timer >= regainDelay && GameObject.Find("Shield").GetComponent<MeshRenderer>().enabled == false)
         {
             energy += regainSpeed * Time.deltaTime;
             if(energy > 100)

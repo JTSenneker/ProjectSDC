@@ -5,7 +5,7 @@ using UnityEngine;
 public class Upgrade : MonoBehaviour
 {
     public string upgradeName;
-    public virtual void UseUpgrade(bool active)
+    public virtual void UseUpgrade(bool active,bool activeShield)
     {
 
     }

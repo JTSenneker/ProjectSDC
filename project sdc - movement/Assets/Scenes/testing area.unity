@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  shieldPoint: {fileID: 1460247035}
+  shieldDepletion: 5
 --- !u!1001 &6313491528950162028
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -19,10 +19,12 @@ public class PlayerMovement : MonoBehaviour
     private bool crouch = false;
     private bool running = false;
     public bool active;
-    
+    public bool activeShield;
+
     void Start()
     {
         active = false;
+        activeShield = false;
         rb = GetComponent<Rigidbody>();
         currentSpeed = walkSpeed;
         playerStats = GetComponent<PlayerStats>();
@@ -32,8 +34,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKeyDown("r"))
         {
+            playerStats.TimerReset();
             active = !active;
-            upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(active);
+            upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(active,activeShield);
+        }
+        if(playerStats.energy <= 30&&active)
+        {
+            playerStats.TimerReset();
+            active = !active;
+            upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(active, activeShield);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {

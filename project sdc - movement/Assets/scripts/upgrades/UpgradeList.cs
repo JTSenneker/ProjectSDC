@@ -6,13 +6,15 @@ public class UpgradeList : MonoBehaviour
 {
     public Dictionary<string, bool> Upgrades = new Dictionary<string, bool>();
     public List<Upgrade> upgrades = new List<Upgrade>();
-    
+
+    PlayerMovement playerMovement;
     private int upgradeCount;
     public int currentUpgrade;
     string[] yourUpgrades = new string[5];
     Text text;
     void Start()
     {
+        playerMovement = GameObject.Find("player").GetComponent<PlayerMovement>();
         upgrades.Add(new ShieldUpgrade());
         upgrades.Add(new HologramUpgrade());
         upgrades.Add(new InvisibilityUpgrade());
@@ -38,7 +40,7 @@ public class UpgradeList : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.Q) && !playerMovement.active)
         {
             currentUpgrade++;
             if(currentUpgrade>=upgradeCount)

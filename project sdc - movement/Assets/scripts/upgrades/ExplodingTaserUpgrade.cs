@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ExplodingTaserUpgrade : Upgrade
 {
-    public override void UseUpgrade(bool active)
+    public override void UseUpgrade(bool active,bool activeShield)
     {
-        base.UseUpgrade(active);
+        base.UseUpgrade(active, activeShield);
         if (PlayerManager.hasExplosiveTaser)
         {
             Debug.Log("exploding taser");
