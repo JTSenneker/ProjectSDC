@@ -32,17 +32,31 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown("r"))
+        
+        
+        if (playerStats.energy <= 30&&active)
         {
             playerStats.TimerReset();
-            active = !active;
-            upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(active,activeShield);
-        }
-        if(playerStats.energy <= 30&&active)
-        {
-            playerStats.TimerReset();
-            active = !active;
+            active = false;
             upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(active, activeShield);
+        }
+        if (Input.GetKeyDown("r"))
+        {
+            playerStats.TimerReset();
+            print(active);
+            if (active)
+            {
+                active = false;
+                print("Turn off");
+                upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(false, activeShield);
+                
+            }
+            else
+            {
+                print("Turn on");
+                upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(true, activeShield);
+                active = true;
+            }
         }
         if (Input.GetKeyDown(KeyCode.C))
         {

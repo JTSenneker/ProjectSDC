@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class TaserUpgrade : Upgrade
 {
+    
     public override void UseUpgrade(bool active, bool activeShield)
     {
         base.UseUpgrade(active, activeShield);
         if (PlayerManager.hasTaser)
         {
-            Debug.Log("taser");
+            GameObject.Find("MeleeAttack").GetComponent<BoxCollider>().enabled=active;
         }
     }
 }
