@@ -27,7 +27,6 @@ public class MoneyManager : MonoBehaviour
 
     void Start()
     {
-        money = ShopController.funds;
         for (int i = 0; i < 5; i++)
         {
             if (inventory[i] == null)

@@ -55,7 +55,6 @@ public class ShopController : MonoBehaviour
     
     void Start()
     {
-        gameObject.GetComponent<MoneyManager>().Sell();
         funds = MoneyManager.money;
         SetBankText();
         longRange.interactable = false;
@@ -316,6 +315,7 @@ public class ShopController : MonoBehaviour
 
     public void ReturnToGame()
     {
+        MoneyManager.money = funds;
         SceneManager.LoadScene(sceneName: "Inventory");
     }
 
