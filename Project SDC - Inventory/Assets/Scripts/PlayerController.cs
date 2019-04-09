@@ -89,8 +89,11 @@ public class PlayerController : MonoBehaviour
 
         else if (other.gameObject.CompareTag("Pawn"))
         {
-            FindObjectOfType<MoneyManager>().Sell();
-            inventoryMiscText.gameObject.SetActive(true);
+            if (MoneyManager.inventory[0] != "Empty")
+            {
+                FindObjectOfType<MoneyManager>().Sell();
+                inventoryMiscText.gameObject.SetActive(true);
+            }
         }
 
         if (other.gameObject.CompareTag("Shop"))
