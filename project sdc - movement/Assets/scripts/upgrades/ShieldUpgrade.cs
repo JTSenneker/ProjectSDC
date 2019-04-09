@@ -14,13 +14,13 @@ public class ShieldUpgrade : Upgrade
             {
                 GameObject.Find("Shield").GetComponent<MeshRenderer>().enabled = true;
                 GameObject.Find("Shield").GetComponent<BoxCollider>().enabled = true;
-                Debug.Log("on");
+                Debug.Log("shield is on");
             }
             else if(active == false)
             {
                 GameObject.Find("Shield").GetComponent<MeshRenderer>().enabled = false;
                 GameObject.Find("Shield").GetComponent<BoxCollider>().enabled = false;
-                Debug.Log("ofnhgfdsff");
+                Debug.Log("shield is off");
             }
         }
     }

@@ -10,6 +10,16 @@ public class InvisibilityUpgrade : Upgrade
         if (PlayerManager.hasInvisibilityCloak)
         {
             Debug.Log("invisibility cloak");
+            if (active)
+            {
+                GameObject.Find("InvisibilityCloak").GetComponent<InvisibilityControllor>().enabled = true;
+                Debug.Log("invisibility cloak is on");
+            }
+            else if (active == false)
+            {
+                GameObject.Find("InvisibilityCloak").GetComponent<InvisibilityControllor>().enabled = false;
+                Debug.Log("invisibility cloak is off");
+            }
         }
     }
 }
