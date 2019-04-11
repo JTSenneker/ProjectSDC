@@ -827,7 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c598d244541ddfd4a9d6e2fa130c4639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 10000
+  value: 500
 --- !u!135 &405907525
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1521,7 +1521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c598d244541ddfd4a9d6e2fa130c4639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 1000000
+  value: 10000
 --- !u!135 &826684249
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1731,7 +1731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c598d244541ddfd4a9d6e2fa130c4639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 1000
+  value: 50
 --- !u!135 &838011304
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2237,7 +2237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c598d244541ddfd4a9d6e2fa130c4639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 15
+  value: 6
 --- !u!135 &1324630491
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2421,7 +2421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c598d244541ddfd4a9d6e2fa130c4639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 100
+  value: 5
 --- !u!135 &1395335449
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3174,7 +3174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c598d244541ddfd4a9d6e2fa130c4639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 100000
+  value: 5000
 --- !u!135 &1700444659
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3311,7 +3311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c598d244541ddfd4a9d6e2fa130c4639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 10
+  value: 4
 --- !u!135 &1839751329
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3538,7 +3538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c598d244541ddfd4a9d6e2fa130c4639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: -1000000
+  value: -10000
 --- !u!135 &1988666129
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3643,7 +3643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c598d244541ddfd4a9d6e2fa130c4639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 5
+  value: 2
 --- !u!135 &2024878215
 SphereCollider:
   m_ObjectHideFlags: 0
