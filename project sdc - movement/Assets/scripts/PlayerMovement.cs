@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     PlayerStats playerStats;
     UpgradeList upgradeList;
+    HologramController hologramController;
     Vector3 movement;
     public float rotate;
     public float walkSpeed;
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private bool crouch = false;
     private bool running = false;
     public bool active;
-    public bool activeShield;
+    public bool activeShield;//irrelevant code does not do anything. its implamented in about ten different scripts, if removed it will cause a cascade of errors.
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = walkSpeed;
         playerStats = GetComponent<PlayerStats>();
         upgradeList = GetComponent<UpgradeList>();
+        hologramController = GameObject.Find("HologramTarget").GetComponent<HologramController>();
     }
     void Update()
     {
@@ -43,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown("r"))
         {
             playerStats.TimerReset();
-            print(active);
+            print("active = "+active);
             if (active)
             {
                 active = false;
@@ -72,6 +74,12 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (hologramController.HologrameMovement==true)
+        {
+            print("yay");
+        }
+        else
+        {
             if (Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") || Input.GetKey("w"))
             {
                 float h = Input.GetAxisRaw("Horizontal");
@@ -79,7 +87,8 @@ public class PlayerMovement : MonoBehaviour
                 move(h, v);
                 currentSpeed = walkSpeed;
             }
-        running = false;
+            running = false;
+        }
     }
     void move(float h,float v)
     {

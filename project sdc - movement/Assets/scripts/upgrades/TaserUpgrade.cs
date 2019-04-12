@@ -10,7 +10,8 @@ public class TaserUpgrade : Upgrade
         base.UseUpgrade(active, activeShield);
         if (PlayerManager.hasTaser)
         {
-            GameObject.Find("MeleeAttack").GetComponent<BoxCollider>().enabled=active;
+            GameObject.Find("MeleeAttack").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("MeleeAttack").GetComponent<TaserController>().enabled = true;
         }
     }
 }

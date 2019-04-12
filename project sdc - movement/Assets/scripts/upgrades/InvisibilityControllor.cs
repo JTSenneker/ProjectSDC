@@ -8,15 +8,17 @@ public class InvisibilityControllor : MonoBehaviour
     public float invisibilityDepletion;
     void Awake()
     {
-        playerStats = GetComponent<PlayerStats>();
-        Debug.Log("invisibility has playerstats");
+        playerStats = GameObject.Find("player").GetComponent<PlayerStats>();
     }
     void Update()
     {
-        playerStats.energy -= invisibilityDepletion * Time.deltaTime;
-        if (playerStats.energy < 30)
+        if (GameObject.Find("InvisibilityCloak").GetComponent<InvisibilityControllor>().enabled == true)
         {
-            playerStats.energy = 30;
+            playerStats.energy -= invisibilityDepletion * Time.deltaTime;
+            if (playerStats.energy < 30)
+            {
+                playerStats.energy = 30;
+            }
         }
     }
 }
