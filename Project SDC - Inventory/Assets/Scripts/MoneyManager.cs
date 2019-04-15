@@ -27,13 +27,7 @@ public class MoneyManager : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            if (inventory[i] == null)
-            {
-                inventory[i] = "Empty";
-            }
-        }
+
     }
 
     public void Sell()

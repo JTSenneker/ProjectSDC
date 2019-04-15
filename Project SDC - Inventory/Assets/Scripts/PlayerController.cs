@@ -21,6 +21,13 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        for (int i = 0; i < 5; i++)
+        {
+            if (MoneyManager.inventory[i] == null)
+            {
+                MoneyManager.inventory[i] = "Empty";
+            }
+        }
         rb = GetComponent<Rigidbody>();
         inventoryMenu.gameObject.SetActive(false);
         inventoryMiscText.gameObject.SetActive(false);
