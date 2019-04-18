@@ -112,9 +112,9 @@ public class player : MonoBehaviour {
                     else if (hit.collider.gameObject.tag == ("Guard"))
                     {
                         Debug.Log("Pickpocket");
-                        KeyCardCheck = other.GetComponent<GuardnavcanChase>().hasKeycard;
-                        GunCheck = other.GetComponent<GuardnavcanChase>().hasGun;
-                        TaserCheck = other.GetComponent<GuardnavcanChase>().hasTaser;
+                        KeyCardCheck = hit.collider.GetComponent<GuardnavcanChase>().hasKeycard;
+                        GunCheck = hit.collider.GetComponent<GuardnavcanChase>().hasGun;
+                        TaserCheck = hit.collider.GetComponent<GuardnavcanChase>().hasTaser;
                         if (KeyCardCheck == true)
                         {
                             Debug.Log("Get KeyCard");
@@ -130,9 +130,9 @@ public class player : MonoBehaviour {
                             Debug.Log("Get Taser");
                             TaserCheck = false;
                         }
-                        other.GetComponent<GuardnavcanChase>().hasKeycard = KeyCardCheck;
-                        other.GetComponent<GuardnavcanChase>().hasGun = GunCheck;
-                        other.GetComponent<GuardnavcanChase>().hasTaser = TaserCheck;
+                        hit.collider.GetComponent<GuardnavcanChase>().hasKeycard = KeyCardCheck;
+                        hit.collider.GetComponent<GuardnavcanChase>().hasGun = GunCheck;
+                        hit.collider.GetComponent<GuardnavcanChase>().hasTaser = TaserCheck;
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
                     }

@@ -22,7 +22,7 @@ public class CameraSpiderAI : MonoBehaviour
     public Vector3 LastSighting;
     private Vector3 Lungespot;
     private Vector3 wallSpot;
-    private static bool ischasing;
+    private bool ischasing;
     private Collider Orb_Collider;
     private Collider B_Collider;
     private Collider C_Collider;
@@ -150,7 +150,7 @@ public class CameraSpiderAI : MonoBehaviour
 
     void detect(Collider other)
     {
-        if (other.gameObject.tag == ("Player"))
+        if (other.gameObject.tag == ("Player") || other.gameObject.tag == ("holoPlayer"))
         {
 
             Vector3 direction = other.transform.position - transform.position;
@@ -170,6 +170,25 @@ public class CameraSpiderAI : MonoBehaviour
 
                         Debug.Log("sight");
                         LastSighting = player.position;
+                        if (Vector3.Distance(transform.position, wallSpot) < .15f)
+                        {
+                            Lungespot = LastSighting;
+                        }
+                        else
+                        {
+                            Lungespot = wallSpot;
+                        }
+                        Orb_Collider.enabled = true;
+                        C_Collider.enabled = true;
+                        B_Collider.enabled = true;
+                        ischasing = true;
+
+                    }
+                    else if (hit.collider.gameObject.tag == ("holoPlayer"))
+                    {
+
+                        Debug.Log("sight");
+                        LastSighting = hit.collider.gameObject.transform.position;
                         if (Vector3.Distance(transform.position, wallSpot) < .15f)
                         {
                             Lungespot = LastSighting;

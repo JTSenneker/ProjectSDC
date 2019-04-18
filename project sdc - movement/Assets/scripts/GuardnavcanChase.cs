@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuardnavcanChase : MonoBehaviour {
+public class GuardnavcanChase : MonoBehaviour
+{
+
     UnityEngine.AI.NavMeshAgent nav;
     public Transform pathHolder;
     public float speed;
@@ -15,21 +17,23 @@ public class GuardnavcanChase : MonoBehaviour {
     public float fieldOfViewAngle;
     public float shootdistance;
     public float Meleedistance;
-    public float Boxdistance;
     public Vector3 movement;
     public Transform[] targetWaypoints;
     float timer;
     float MeleeTimer;
     float GunTimer;
     float TaserTimer;
+    public float Boxdistance;
     public bool hasTaser;
     public bool hasKeycard;
     public bool hasGun;
 
+
+
     public Vector3 LastSighting;
     private Collider B_Collider;
     private Collider C_Collider;
-    private static bool ischasing;
+    public bool ischasing;
 
     private Transform player;
     private Vector3 start;
@@ -131,11 +135,12 @@ public class GuardnavcanChase : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == ("Player") || other.gameObject.tag == ("ChasingGuard") || other.gameObject.tag == ("ChasingcamGuard"))
+        if (other.gameObject.tag == ("Player") || other.gameObject.tag == ("ChasingGuard") || other.gameObject.tag == ("ChasingcamGuard") || other.gameObject.tag == ("holoPlayer"))
         {
             detect(other);
 
         }
+
         if (other.gameObject.tag == ("Pushable"))
         {
             RaycastHit hit;
@@ -151,12 +156,13 @@ public class GuardnavcanChase : MonoBehaviour {
             C_Collider.enabled = true;
             B_Collider.enabled = true;
         }
+
     }
 
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == ("Player") || other.gameObject.tag == ("ChasingGuard") || other.gameObject.tag == ("ChasingcamGuard"))
+        if (other.gameObject.tag == ("Player") || other.gameObject.tag == ("ChasingGuard") || other.gameObject.tag == ("ChasingcamGuard") || other.gameObject.tag == ("holoPlayer"))
         {
 
             detect(other);
@@ -165,7 +171,7 @@ public class GuardnavcanChase : MonoBehaviour {
     }
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == ("Player") || other.gameObject.tag == ("ChasingGuard") || other.gameObject.tag == ("ChasingcamGuard"))
+        if (other.gameObject.tag == ("Player") || other.gameObject.tag == ("ChasingGuard") || other.gameObject.tag == ("ChasingcamGuard") || other.gameObject.tag == ("holoPlayer"))
         {
 
             detect(other);
@@ -190,7 +196,7 @@ public class GuardnavcanChase : MonoBehaviour {
 
     void detect(Collider other)
     {
-        if (other.gameObject.tag == ("Player") || other.gameObject.tag == ("ChasingGuard") || other.gameObject.tag == ("ChasingcamGuard"))
+        if (other.gameObject.tag == ("Player") || other.gameObject.tag == ("ChasingGuard") || other.gameObject.tag == ("ChasingcamGuard") || other.gameObject.tag == ("holoPlayer"))
         {
 
             Vector3 direction = other.transform.position - transform.position;
@@ -213,11 +219,23 @@ public class GuardnavcanChase : MonoBehaviour {
                         {
                             if (Physics.Raycast(transform.position, direction.normalized, out hit, Meleedistance))
                             {
-                                MeleeTimer += Time.deltaTime;
-                                if (timer >= MeleeTime)
+                                if (hasTaser == true)
                                 {
-                                    MeleeTimer = 0;
-                                    Debug.Log("Melee");
+                                    TaserTimer += Time.deltaTime;
+                                    if (timer >= TaserTime)
+                                    {
+                                        TaserTimer = 0;
+                                        Debug.Log("Taser");
+                                    }
+                                }
+                                else
+                                {
+                                    MeleeTimer += Time.deltaTime;
+                                    if (timer >= MeleeTime)
+                                    {
+                                        MeleeTimer = 0;
+                                        Debug.Log("Melee");
+                                    }
                                 }
                             }
                             else
@@ -232,13 +250,48 @@ public class GuardnavcanChase : MonoBehaviour {
                                     }
 
                                 }
+
+                            }
+                        }
+                        C_Collider.enabled = true;
+                        B_Collider.enabled = true;
+                    }
+                    else if (hit.collider.gameObject.tag == ("holoPlayer"))
+                    {
+                        Debug.Log("holosight");
+                        ischasing = true;
+                        LastSighting = other.gameObject.transform.position;
+                        if (Physics.Raycast(transform.position, direction.normalized, out hit, shootdistance))
+                        {
+                            if (Physics.Raycast(transform.position, direction.normalized, out hit, Meleedistance))
+                            {
+                                MeleeTimer += Time.deltaTime;
+                                if (timer >= MeleeTime)
+                                {
+                                    MeleeTimer = 0;
+                                    Debug.Log("holoMelee");
+                                }
+                            }
+                            else
+                            {
+                                if (hasGun == true)
+                                {
+                                    GunTimer += Time.deltaTime;
+                                    if (timer >= GunTime)
+                                    {
+                                        GunTimer = 0;
+                                        Debug.Log("holoShoot");
+
+                                    }
+
+                                }
                                 else if (hasTaser == true)
                                 {
                                     TaserTimer += Time.deltaTime;
                                     if (timer >= TaserTime)
                                     {
                                         TaserTimer = 0;
-                                        Debug.Log("Taser");
+                                        Debug.Log("holoTaser");
                                     }
                                 }
                             }
@@ -250,7 +303,7 @@ public class GuardnavcanChase : MonoBehaviour {
                     {
                         if (ischasing == false)
                         {
-                            LastSighting = other.GetComponent<GuardnavcanChase>().LastSighting;
+                            LastSighting = hit.collider.gameObject.GetComponent<GuardAIv2>().LastSighting;
                         }
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
@@ -259,7 +312,10 @@ public class GuardnavcanChase : MonoBehaviour {
                     {
                         if (ischasing == false)
                         {
-                            LastSighting = other.GetComponent<CameraSpiderAI>().LastSighting;
+                            if (hit.collider.gameObject.GetComponent<CameraSpiderAI>().LastSighting != null)
+                            {
+                                LastSighting = hit.collider.gameObject.GetComponent<CameraSpiderAI>().LastSighting;
+                            }
                         }
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
@@ -296,8 +352,20 @@ public class GuardnavcanChase : MonoBehaviour {
         }
     }
 
+    void Shoot()
+    {
 
+    }
 
+    void Taser()
+    {
 
+    }
+
+    void Melee()
+    {
+
+    }
 
 }
+
