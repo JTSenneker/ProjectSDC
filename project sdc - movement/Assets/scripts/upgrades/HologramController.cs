@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,13 @@ public class HologramController : MonoBehaviour
 {
     Vector3 movement;
     Rigidbody rb;
+    public Transform player;
+    public Transform target;
     public bool HologrameMovement;
     public float aimSpeed;
+    public float maxDistance;
+    public float minDistance;
+    private float currentDistance;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -17,10 +23,6 @@ public class HologramController : MonoBehaviour
         if (GameObject.Find("HologramTarget").GetComponent<MeshRenderer>().enabled == true)
         {
             HologrameMovement = true;
-            if (HologrameMovement)//this is a place holder statement.
-            {
-                // this will be used to tell if the target is to close to the player.
-            }
             if (Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") || Input.GetKey("w"))
             {
                 float h = Input.GetAxisRaw("Horizontal");
@@ -39,4 +41,19 @@ public class HologramController : MonoBehaviour
         movement = movement.normalized * aimSpeed * Time.deltaTime;
         rb.MovePosition(transform.position + movement);
     }
+    void FixedUpdate()
+    {
+        RaycastHit hit = new RaycastHit();
+        Debug.DrawRay(player.position, (target.position - player.position));
+        if (Vector3.Distance(player.position, target.position) > minDistance && Vector3.Distance(player.position, target.position) < maxDistance && hit.rigidbody == GameObject.Find("Hologram"))
+        {
+            Debug.Log("you are able to fire there.");
+        }
+        else
+        {
+            Debug.Log("you are not able to fire there");
+        }
+    }
 }
+
+
