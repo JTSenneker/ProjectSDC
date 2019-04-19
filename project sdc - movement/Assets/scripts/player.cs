@@ -13,9 +13,7 @@ public class player : MonoBehaviour {
 
     private Collider B_Collider;
     private Collider C_Collider;
-    private bool KeyCardCheck;
-    private bool GunCheck;
-    private bool TaserCheck;
+    
 
 
 
@@ -109,33 +107,7 @@ public class player : MonoBehaviour {
                         B_Collider.enabled = true;
 
                     }
-                    else if (hit.collider.gameObject.tag == ("Guard"))
-                    {
-                        Debug.Log("Pickpocket");
-                        KeyCardCheck = hit.collider.GetComponent<GuardnavcanChase>().hasKeycard;
-                        GunCheck = hit.collider.GetComponent<GuardnavcanChase>().hasGun;
-                        TaserCheck = hit.collider.GetComponent<GuardnavcanChase>().hasTaser;
-                        if (KeyCardCheck == true)
-                        {
-                            Debug.Log("Get KeyCard");
-                            KeyCardCheck = false;
-                        }
-                        if (GunCheck == true)
-                        {
-                            Debug.Log("Get Gun");
-                            GunCheck = false;
-                        }
-                        if (TaserCheck == true)
-                        {
-                            Debug.Log("Get Taser");
-                            TaserCheck = false;
-                        }
-                        hit.collider.GetComponent<GuardnavcanChase>().hasKeycard = KeyCardCheck;
-                        hit.collider.GetComponent<GuardnavcanChase>().hasGun = GunCheck;
-                        hit.collider.GetComponent<GuardnavcanChase>().hasTaser = TaserCheck;
-                        C_Collider.enabled = true;
-                        B_Collider.enabled = true;
-                    }
+                    
                 }
                 else
                 {

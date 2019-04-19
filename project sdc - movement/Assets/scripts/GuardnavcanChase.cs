@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GuardnavcanChase : MonoBehaviour
 {
-
     UnityEngine.AI.NavMeshAgent nav;
     public Transform pathHolder;
     public float speed;
@@ -12,9 +11,9 @@ public class GuardnavcanChase : MonoBehaviour
     public float waitTime;
     public float MeleeTime;
     public float GunTime;
-    public float TaserTime;
     public float turnSpeed;
     public float fieldOfViewAngle;
+    public float shootangle;
     public float shootdistance;
     public float Meleedistance;
     public Vector3 movement;
@@ -24,9 +23,7 @@ public class GuardnavcanChase : MonoBehaviour
     float GunTimer;
     float TaserTimer;
     public float Boxdistance;
-    public bool hasTaser;
-    public bool hasKeycard;
-    public bool hasGun;
+
 
 
 
@@ -34,7 +31,8 @@ public class GuardnavcanChase : MonoBehaviour
     private Collider B_Collider;
     private Collider C_Collider;
     public bool ischasing;
-
+    private bool ismelee;
+    private bool isshoot;
     private Transform player;
     private Vector3 start;
     private Transform up;
@@ -64,13 +62,64 @@ public class GuardnavcanChase : MonoBehaviour
 
         if (ischasing == true)
         {
+            
             nav.SetDestination(player.position);
             gameObject.tag = ("ChasingGuard");
         }
         if (ischasing == false)
         {
-
+            isshoot = false;
+            ismelee = false;
             gameObject.tag = ("Guard");
+
+        }
+        if (ismelee == true)
+        {
+
+            MeleeTimer += Time.deltaTime;
+
+        }
+        else
+        {
+            MeleeTimer = 0;
+        }
+
+        if (MeleeTimer >= MeleeTime)
+        {
+            if (ismelee == true)
+            {
+                Stamina.energy = Stamina.energy - 50;
+                Debug.Log(Stamina.energy);
+                MeleeTimer = 0;
+                ismelee = false;
+            }
+            MeleeTimer = 0;
+
+        }
+
+
+        if (isshoot == true)
+        {
+
+            GunTimer += Time.deltaTime;
+
+        }
+        else
+        {
+            GunTimer = 0;
+        }
+
+        if (GunTimer >= GunTime)
+        {
+            if (isshoot == true)
+            {
+                Debug.Log("Shoot");
+                Stamina.energy = Stamina.energy - 30;
+                Debug.Log(Stamina.energy);
+                GunTimer = 0;
+                isshoot = false;
+            }
+            GunTimer = 0;
 
         }
 
@@ -78,19 +127,19 @@ public class GuardnavcanChase : MonoBehaviour
         if (Vector3.Distance(LastSighting, start) < .05f)
         {
             NextPoint();
-
+            ischasing = false;
         }
         else
         {
-            if (Vector3.Distance(transform.position, LastSighting) < .5f)
+            if (Vector3.Distance(transform.position, LastSighting) < .2f)
             {
+                ischasing = false;
                 timer += Time.deltaTime;
                 if (timer >= waitTime)
                 {
                     timer = 0;
                     LastSighting = start;
                     NextPoint();
-
                 }
             }
             else
@@ -111,6 +160,7 @@ public class GuardnavcanChase : MonoBehaviour
         start = player.position;
         B_Collider = GetComponent<BoxCollider>();
         C_Collider = GetComponent<CapsuleCollider>();
+        player.GetComponent<Stamina>();
         LastSighting = start;
     }
 
@@ -162,12 +212,17 @@ public class GuardnavcanChase : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == ("Player") || other.gameObject.tag == ("ChasingGuard") || other.gameObject.tag == ("ChasingcamGuard") || other.gameObject.tag == ("holoPlayer"))
+        if (other.gameObject.tag == ("ChasingGuard") || other.gameObject.tag == ("ChasingcamGuard") || other.gameObject.tag == ("holoPlayer"))
         {
 
             detect(other);
 
         }
+        if (other.gameObject.tag == ("Player"))
+        {
+            ischasing = false;
+        }
+
     }
     void OnTriggerStay(Collider other)
     {
@@ -215,43 +270,31 @@ public class GuardnavcanChase : MonoBehaviour
                         Debug.Log("sight");
                         ischasing = true;
                         LastSighting = player.position;
-                        if (Physics.Raycast(transform.position, direction.normalized, out hit, shootdistance))
+                        if (Physics.Raycast(transform.position, direction.normalized, out hit, Meleedistance))
+                        {
+                            ismelee = true;
+                            isshoot = false;
+
+                        }
+                        else if (Physics.Raycast(transform.position, direction.normalized, out hit, shootdistance) && angle <= shootangle * .5f)
                         {
                             if (Physics.Raycast(transform.position, direction.normalized, out hit, Meleedistance))
                             {
-                                if (hasTaser == true)
-                                {
-                                    TaserTimer += Time.deltaTime;
-                                    if (timer >= TaserTime)
-                                    {
-                                        TaserTimer = 0;
-                                        Debug.Log("Taser");
-                                    }
-                                }
-                                else
-                                {
-                                    MeleeTimer += Time.deltaTime;
-                                    if (timer >= MeleeTime)
-                                    {
-                                        MeleeTimer = 0;
-                                        Debug.Log("Melee");
-                                    }
-                                }
+                                ismelee = true;
+                                isshoot = false;
+
                             }
                             else
                             {
-                                if (hasGun == true)
-                                {
-                                    GunTimer += Time.deltaTime;
-                                    if (timer >= GunTime)
-                                    {
-                                        GunTimer = 0;
-                                        Debug.Log("Shoot");
-                                    }
-
-                                }
+                                isshoot = true;
+                                ismelee = false;
 
                             }
+                        }
+                        else
+                        {
+                            isshoot = false;
+                            ismelee = false;
                         }
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
@@ -269,30 +312,18 @@ public class GuardnavcanChase : MonoBehaviour
                                 if (timer >= MeleeTime)
                                 {
                                     MeleeTimer = 0;
-                                    Debug.Log("holoMelee");
+                                    Debug.Log("Melee");
                                 }
+
                             }
                             else
                             {
-                                if (hasGun == true)
-                                {
-                                    GunTimer += Time.deltaTime;
-                                    if (timer >= GunTime)
-                                    {
-                                        GunTimer = 0;
-                                        Debug.Log("holoShoot");
 
-                                    }
-
-                                }
-                                else if (hasTaser == true)
+                                GunTimer += Time.deltaTime;
+                                if (timer >= GunTime)
                                 {
-                                    TaserTimer += Time.deltaTime;
-                                    if (timer >= TaserTime)
-                                    {
-                                        TaserTimer = 0;
-                                        Debug.Log("holoTaser");
-                                    }
+                                    GunTimer = 0;
+                                    Debug.Log("Shoot");
                                 }
                             }
                         }
@@ -303,7 +334,9 @@ public class GuardnavcanChase : MonoBehaviour
                     {
                         if (ischasing == false)
                         {
-                            LastSighting = hit.collider.gameObject.GetComponent<GuardAIv2>().LastSighting;
+                            LastSighting = hit.collider.gameObject.GetComponent<GuardnavcanChase>().LastSighting;
+                            isshoot = false;
+                            ismelee = false;
                         }
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
@@ -325,6 +358,7 @@ public class GuardnavcanChase : MonoBehaviour
                         ischasing = false;
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
+
                     }
                 }
                 else
@@ -332,15 +366,19 @@ public class GuardnavcanChase : MonoBehaviour
                     ischasing = false;
                     C_Collider.enabled = true;
                     B_Collider.enabled = true;
+
                 }
+
                 C_Collider.enabled = true;
                 B_Collider.enabled = true;
+
             }
             else
             {
                 ischasing = false;
                 C_Collider.enabled = true;
                 B_Collider.enabled = true;
+
             }
 
         }
@@ -349,23 +387,10 @@ public class GuardnavcanChase : MonoBehaviour
             ischasing = false;
             C_Collider.enabled = true;
             B_Collider.enabled = true;
+
         }
     }
 
-    void Shoot()
-    {
-
-    }
-
-    void Taser()
-    {
-
-    }
-
-    void Melee()
-    {
-
-    }
-
 }
+
 
