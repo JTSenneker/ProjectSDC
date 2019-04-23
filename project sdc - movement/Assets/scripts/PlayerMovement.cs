@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (hologramController.HologrameMovement==true)
         {
-            print("yay");
+            print("player can not move while aiming hologram");
         }
         else
         {

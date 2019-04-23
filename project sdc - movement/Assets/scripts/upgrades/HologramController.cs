@@ -7,15 +7,19 @@ public class HologramController : MonoBehaviour
 {
     Vector3 movement;
     Rigidbody rb;
+    PlayerStats playerStats;
     public Transform player;
     public Transform target;
     public bool HologrameMovement;
     public float aimSpeed;
     public float maxDistance;
     public float minDistance;
-    private float currentDistance;
+    public float hologramDepletion;
+    public Material toClose;
+    public Material youCanShootThere;
     void Start()
     {
+        playerStats = GameObject.Find("player").GetComponent<PlayerStats>();
         rb = GetComponent<Rigidbody>();
     }
     void Update()
@@ -45,13 +49,20 @@ public class HologramController : MonoBehaviour
     {
         RaycastHit hit = new RaycastHit();
         Debug.DrawRay(player.position, (target.position - player.position));
+        Physics.Raycast(player.position, (target.position - player.position),out hit);
         if (Vector3.Distance(player.position, target.position) > minDistance && Vector3.Distance(player.position, target.position) < maxDistance && hit.rigidbody == GameObject.Find("Hologram"))
         {
-            Debug.Log("you are able to fire there.");
+            gameObject.GetComponent<Renderer>().sharedMaterial = youCanShootThere;
+            if (Input.GetKeyDown("space"))
+            {
+                playerStats.energy -= hologramDepletion;
+                GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled = true;
+                GameObject.Find("HolographicPlayer").GetComponent<BoxCollider>().enabled = true;
+            }
         }
         else
         {
-            Debug.Log("you are not able to fire there");
+            gameObject.GetComponent<Renderer>().sharedMaterial = toClose;
         }
     }
 }
