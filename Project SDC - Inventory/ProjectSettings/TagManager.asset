@@ -4,10 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Treasure
-  - Coins
-  - Pawn
   - Shop
+  - Skill Point
   layers:
   - Default
   - TransparentFX
