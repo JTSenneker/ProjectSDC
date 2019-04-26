@@ -11,18 +11,16 @@ public class CameraSpiderAI : MonoBehaviour
     public Transform[] targetWaypoints;
     float timer;
     public float waitTime;
-    public float lungeSpeedMultiplier;
+    public float lungeSpeed;
     public float waitAfterLunge;
     public float lookSway;
     public float LookAverageDir;
-    public float startX;
-    public float startY;  //MAKE SURE TO CHANGE THESE TO WHERE YOU WANT THIS THING TO START!!
-    public float startZ;
-
     public Vector3 LastSighting;
+
+    private Vector3 startspot;
     private Vector3 Lungespot;
     private Vector3 wallSpot;
-    private bool ischasing;
+    public bool ischasing;
     private Collider Orb_Collider;
     private Collider B_Collider;
     private Collider C_Collider;
@@ -31,16 +29,18 @@ public class CameraSpiderAI : MonoBehaviour
     private int totalPoints = 0;
     private bool islunging;
     float viewAngle;
+    private float basespeed;
+    private float lungetimer;
 
     void Awake()
     {
+        startspot = this.transform.position;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
         Vector3[] waypoints = new Vector3[targetWaypoints.Length];
         ischasing = false;
-        wallSpot.x = startX;
-        wallSpot.y = startY;
-        wallSpot.z = startZ;
+        wallSpot = startspot;
+        basespeed = GetComponent<UnityEngine.AI.NavMeshAgent>().speed;
 
         Orb_Collider = GetComponent<SphereCollider>();
         B_Collider = GetComponent<BoxCollider>();
@@ -60,7 +60,6 @@ public class CameraSpiderAI : MonoBehaviour
     void Update()
     {
 
-
         if (ischasing == true)
         {
             gameObject.tag = ("ChasingcamGuard");
@@ -68,44 +67,46 @@ public class CameraSpiderAI : MonoBehaviour
             {
                 if (islunging == false)
                 {
-                    Debug.Log("lunge");
+
                     nav.SetDestination(Lungespot);
                     islunging = true;
-
+                    nav.speed = lungeSpeed;
                 }
             }
             else if (islunging == true && Vector3.Distance(transform.position, Lungespot) < .5f)
             {
+                Debug.Log(Lungespot);
+                lungetimer += Time.deltaTime;
+                nav.speed = 0;
 
-                islunging = false;
+                if (lungetimer >= waitAfterLunge)
+                {
+                    islunging = false;
+                    Debug.Log("resume chase");
+                    Lungespot = wallSpot;
+                    nav.speed = basespeed;
+                    lungetimer = 0;
+                }
 
             }
             else if (islunging == false)
             {
                 nav.SetDestination(LastSighting);
-
             }
         }
 
         if (ischasing == false)
         {
-
             gameObject.tag = ("Guard");
         }
 
         if (Vector3.Distance(LastSighting, wallSpot) < .05f)
         {
-
-            Debug.Log("GO to wall");
-
-
             if (Vector3.Distance(transform.position, wallSpot) < .15f)
             {
-
                 float angle = Mathf.Sin(Time.time) * lookSway + LookAverageDir;
                 Vector3 eulers = new Vector3(0, angle, 0);
                 transform.rotation = Quaternion.Euler(eulers);
-
             }
             else
             {
@@ -116,13 +117,11 @@ public class CameraSpiderAI : MonoBehaviour
         }
         else
         {
-
             if (Vector3.Distance(transform.position, LastSighting) < .5f)
             {
                 timer += Time.deltaTime;
                 if (timer >= waitTime)
                 {
-
                     timer = 0;
                     nav.SetDestination(wallSpot);
                     LastSighting = wallSpot;
@@ -134,6 +133,7 @@ public class CameraSpiderAI : MonoBehaviour
                 nav.SetDestination(LastSighting);
             }
         }
+
     }
 
 
@@ -174,10 +174,7 @@ public class CameraSpiderAI : MonoBehaviour
                         {
                             Lungespot = LastSighting;
                         }
-                        else
-                        {
-                            Lungespot = wallSpot;
-                        }
+
                         Orb_Collider.enabled = true;
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
@@ -193,10 +190,7 @@ public class CameraSpiderAI : MonoBehaviour
                         {
                             Lungespot = LastSighting;
                         }
-                        else
-                        {
-                            Lungespot = wallSpot;
-                        }
+
                         Orb_Collider.enabled = true;
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
