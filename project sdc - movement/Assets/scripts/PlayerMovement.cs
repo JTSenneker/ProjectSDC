@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     public float energyDepletion;
     private float currentSpeed;
     public float fatigueSpeed;
+    private int hologram = 1;
+    private int shield = 0;
+    private int invisibility = 2;
     private Rigidbody rb;
     private Quaternion Quat;
     private bool crouch = false;
@@ -36,15 +39,18 @@ public class PlayerMovement : MonoBehaviour
     {
         
         
-        if (playerStats.energy <= 30&&active)
+        if (playerStats.energy <= 30 && active && (upgradeList.upgrades[upgradeList.currentUpgrade] == upgradeList.upgrades[shield] || upgradeList.upgrades[upgradeList.currentUpgrade] == upgradeList.upgrades[invisibility]))
         {
             playerStats.TimerReset();
             active = false;
             upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(active, activeShield);
         }
-        if (Input.GetKeyDown("r"))
+        if (Input.GetKeyDown("r") && GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled == false)
         {
-            playerStats.TimerReset();
+            if (upgradeList.upgrades[upgradeList.currentUpgrade] != upgradeList.upgrades[hologram])
+            {
+                playerStats.TimerReset();
+            }
             print("active = "+active);
             if (active)
             {
