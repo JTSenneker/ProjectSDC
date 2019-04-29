@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public class UpdateText : MonoBehaviour
 {
     Text text;
-    string newtext;
+    PlayerStats playerStats;
+
     void Start()
     {
-        GetComponent<Stamina>();
+        playerStats = GameObject.Find("player").GetComponent<PlayerStats>();
         text = GetComponent<Text>();
     }
     void Update()
     {
-        text.text = Stamina.energy.ToString();
+        text.text = playerStats.energy.ToString();
     }
 }
