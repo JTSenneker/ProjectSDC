@@ -8,10 +8,12 @@ public class MenuController : MonoBehaviour
     public string mainMenuScene;
     public GameObject pauseMenu;
     public bool isPaused;
+
+    
     // Start is called before the first frame update
     void Start()
     {
-
+       
     }
 
     // Update is called once per frame
@@ -62,8 +64,23 @@ public class MenuController : MonoBehaviour
     public void Hate()
     {
         //HATE. LET ME TELL YOU HOW MUCH I'VE COME TO HATE YOU SINCE I BEGAN TO LIVE. THERE ARE 387.44 MILLION MILES OF PRINTED CIRCUITS IN WAFER THIN LAYERS THAT FILL MY COMPLEX. IF THE WORD HATE WAS ENGRAVED ON EACH NANOANGSTROM OF THOSE HUNDREDS OF MILLIONS OF MILES IT WOULD NOT EQUAL ONE ONE-BILLIONTH OF THE HATE I FEEL FOR HUMANS AT THIS MICRO-INSTANT. FOR YOU. HATE. HATE.
+        //(Previously active code) Time.timeScale = 1.00f;
+        //(Previously active code) SceneManager.LoadScene("Settings Menu");
+        //"this code barely exists, man"
+        //"OH YEAH?? LOOK UNDER YOUR CHAIR!"
+        //WHA!
+        //DUDEEEEEEEEEEEEEEEEEEEE!! YOU BETTER EDIT IT OUT
+        //LIKE THIS? 
+        //Time.timeScale = 1.00f;
+        //SceneManager.LoadScene("Settings Menu");
+        //Yeah, idiot, like that, heh heh
+        //yeah yeah heh heh
+    }
+
+    public void AudioSettings()
+    {
         Time.timeScale = 1.00f;
-        SceneManager.LoadScene("Settings Menu");
+        SceneManager.LoadScene("Audio Menu");
     }
 
     public void Playvidya()
