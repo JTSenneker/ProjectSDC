@@ -42,23 +42,15 @@ public class HologramController : MonoBehaviour
         {
             HologrameMovement = false;
         }
-    }
-    void move(float h, float v)
-    {
-        movement.Set(h, 0f, v);
-        movement = movement.normalized * aimSpeed * Time.deltaTime;
-        rb.MovePosition(transform.position + movement);
-    }
-    void FixedUpdate()
-    {
+        //activate hologram
         timer += Time.deltaTime;
-        if(timer > hologramTimeToLive + 3)
+        if (timer > hologramTimeToLive + 3)
         {
             timer = 0;
         }
         RaycastHit hit = new RaycastHit();
         Debug.DrawRay(player.position, (target.position - player.position));
-        Physics.Raycast(player.position, (target.position - player.position),out hit);
+        Physics.Raycast(player.position, (target.position - player.position), out hit);
         if (Vector3.Distance(player.position, target.position) > minDistance && Vector3.Distance(player.position, target.position) < maxDistance && hit.rigidbody == GameObject.Find("Hologram"))
         {
             gameObject.GetComponent<Renderer>().sharedMaterial = youCanShootThere;
@@ -77,11 +69,17 @@ public class HologramController : MonoBehaviour
         {
             gameObject.GetComponent<Renderer>().sharedMaterial = toClose;
         }
-        if (timer>hologramTimeToLive)
+        if (timer > hologramTimeToLive)
         {
             GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled = false;
             GameObject.Find("HolographicPlayer").GetComponent<BoxCollider>().enabled = false;
         }
+    }
+    void move(float h, float v)
+    {
+        movement.Set(h, 0f, v);
+        movement = movement.normalized * aimSpeed * Time.deltaTime;
+        rb.MovePosition(transform.position + movement);
     }
 }
 

@@ -80,9 +80,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (hologramController.HologrameMovement==true)
+        if (hologramController.HologrameMovement == true)
         {
-            print("player can not move while aiming hologram");
+            print("player can not move while aiming hologram or during exploding taser");
         }
         else
         {
