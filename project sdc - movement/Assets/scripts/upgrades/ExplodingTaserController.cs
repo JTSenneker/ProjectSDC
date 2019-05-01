@@ -16,12 +16,14 @@ public class ExplodingTaserController : MonoBehaviour
     }
     void Update()
     {
-        hologramController.HologrameMovement = true;
-        playerStats.energy -= explodingTaserDepletion;
-        //need to add animation with hit box activation
-        hologramController.HologrameMovement = false;
-        playerMovement.active = false;
-
-
+        {
+            hologramController.HologrameMovement = true;
+            playerStats.energy -= explodingTaserDepletion;
+            /*need to add animation with hit box activation*/
+            hologramController.HologrameMovement = false;
+            playerMovement.active = false;
+            playerStats.TimerReset();
+            GameObject.Find("ExplodingTaser").GetComponent<ExplodingTaserController>().enabled = false;
+        }
     }
 }
