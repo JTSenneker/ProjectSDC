@@ -11,7 +11,9 @@ public class HologramController : MonoBehaviour
     PlayerMovement playerMovement;
     public Transform player;
     public Transform target;
+    public Transform hologramSpawnPoint;
     public bool HologrameMovement;
+    public bool hologramInScene;
     public float aimSpeed;
     public float maxDistance;
     public float minDistance;
@@ -20,6 +22,7 @@ public class HologramController : MonoBehaviour
     public float timer;
     public Material toClose;
     public Material youCanShootThere;
+    public GameObject hologramPrefab;
     void Start()
     {
         playerStats = GameObject.Find("player").GetComponent<PlayerStats>();
@@ -54,15 +57,19 @@ public class HologramController : MonoBehaviour
         if (Vector3.Distance(player.position, target.position) > minDistance && Vector3.Distance(player.position, target.position) < maxDistance && hit.rigidbody == GameObject.Find("Hologram"))
         {
             gameObject.GetComponent<Renderer>().sharedMaterial = youCanShootThere;
-            if (Input.GetKeyDown("space") && GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled == false)
+            if (Input.GetKeyDown("space") && hologramInScene == false)
             {
-                playerStats.TimerReset();
+                hologramInScene = true;
+                playerStats.regenStamina = false;
+                //playerStats.TimerReset();
                 playerStats.energy -= hologramDepletion;
                 timer = 0;
                 playerMovement.active = false;
-                GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled = true;
-                GameObject.Find("HolographicPlayer").GetComponent<BoxCollider>().enabled = true;
+                //GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled = true;
+                //GameObject.Find("HolographicPlayer").GetComponent<BoxCollider>().enabled = true;
+                Instantiate(hologramPrefab, hologramSpawnPoint.position, Quaternion.identity);
                 GameObject.Find("HologramTarget").GetComponent<MeshRenderer>().enabled = false;
+                playerStats.Invoke("TimerReset", playerStats.regainDelay);
             }
         }
         else
@@ -71,8 +78,10 @@ public class HologramController : MonoBehaviour
         }
         if (timer > hologramTimeToLive)
         {
-            GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled = false;
-            GameObject.Find("HolographicPlayer").GetComponent<BoxCollider>().enabled = false;
+            //GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled = false;
+            //GameObject.Find("HolographicPlayer").GetComponent<BoxCollider>().enabled = false;
+            Object.Destroy(GameObject.Find("Player Hologram(Clone)"));
+            hologramInScene = false;
         }
     }
     void move(float h, float v)

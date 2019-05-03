@@ -37,8 +37,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        
-        
+
+        Debug.Log(upgradeList.currentUpgrade);
         if (playerStats.energy <= 30 && active && (upgradeList.upgrades[upgradeList.currentUpgrade] == upgradeList.upgrades[shield] || upgradeList.upgrades[upgradeList.currentUpgrade] == upgradeList.upgrades[invisibility]))
         {
             playerStats.TimerReset();
@@ -47,9 +47,10 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown("r") && GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled == false)
         {
-            if (upgradeList.upgrades[upgradeList.currentUpgrade] != upgradeList.upgrades[hologram])
+            playerStats.regenStamina = false;
+            if (upgradeList.currentUpgrade != 1)
             {
-                playerStats.TimerReset();
+                playerStats.Invoke("TimerReset", playerStats.regainDelay);
             }
             print("active = "+active);
             if (active)
@@ -106,7 +107,8 @@ public class PlayerMovement : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.LeftShift) && playerStats.energy > playerStats.lowestenergy && crouch == false)
             {
-                playerStats.TimerReset();
+                playerStats.regenStamina = false;
+               // playerStats.TimerReset();
                 running = true;
                 currentSpeed = runSpeed;
                 playerStats.energy -= energyDepletion * Time.deltaTime;
@@ -114,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     playerStats.energy = 30;
                 }
+                playerStats.Invoke("TimerReset", playerStats.regainDelay);
             }
         }
         else

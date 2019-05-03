@@ -22,7 +22,9 @@ public class ExplodingTaserController : MonoBehaviour
             /*need to add animation with hit box activation*/
             hologramController.HologrameMovement = false;
             playerMovement.active = false;
-            playerStats.TimerReset();
+            playerStats.regenStamina = false;
+            playerStats.Invoke("TimerReset", playerStats.regainDelay);
+            //playerStats.TimerReset();
             GameObject.Find("ExplodingTaser").GetComponent<ExplodingTaserController>().enabled = false;
         }
     }

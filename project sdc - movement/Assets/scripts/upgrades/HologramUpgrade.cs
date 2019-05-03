@@ -7,7 +7,7 @@ public class HologramUpgrade : Upgrade
     public override void UseUpgrade(bool active,bool activeShield)
     {
         base.UseUpgrade(active, activeShield);
-        if (PlayerManager.hasHologram)
+        if (PlayerManager.hasHologram &&/*the following condition makes sure the player has 60% stanima*/ GameObject.Find("player").GetComponent<PlayerStats>().energy >= GameObject.Find("HologramTarget").GetComponent<HologramController>().hologramDepletion)
         {
             if (active)
             {
