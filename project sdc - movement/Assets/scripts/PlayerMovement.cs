@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     PlayerStats playerStats;
     UpgradeList upgradeList;
     HologramController hologramController;
-    Vector3 movement;
+    public Vector3 movement;
     public float rotate;
     public float walkSpeed;
     public float runSpeed;

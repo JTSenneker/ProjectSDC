@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     public float lowestenergy;
     public float regainSpeed;
     public float regainDelay;
-    float timer;
+    public float timer;
     PlayerMovement playerMovement;
 
     void Start()

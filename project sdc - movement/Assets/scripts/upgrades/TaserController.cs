@@ -16,7 +16,7 @@ public class TaserController : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Untagged")
+        if(other.tag == "Guard")
         {
             print("player grabs enemy and incapacitates him");
             playerStats.energy -= taserDepletion;
@@ -28,6 +28,7 @@ public class TaserController : MonoBehaviour
             wait = 0;
             GameObject.Find("MeleeAttack").GetComponent<BoxCollider>().enabled = false;
             GameObject.Find("MeleeAttack").GetComponent<TaserController>().enabled = false;
+            other.gameObject.GetComponent<GuardAIv2>().stunned = true;
         }
     }
     void FixedUpdate()
