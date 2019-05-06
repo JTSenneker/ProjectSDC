@@ -22,7 +22,7 @@ public class PlayerStats : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        if (energy <= 100 && regenStamina && GameObject.Find("Shield").GetComponent<MeshRenderer>().enabled == false && GameObject.Find("InvisibilityCloak").GetComponent<InvisibilityControllor>().enabled == false)
+        if (energy <= 100 && timer>regainDelay && GameObject.Find("Shield").GetComponent<MeshRenderer>().enabled == false && GameObject.Find("InvisibilityCloak").GetComponent<InvisibilityControllor>().enabled == false)
         {
             energy += regainSpeed * Time.deltaTime;
             if(energy >= 100)
@@ -42,6 +42,6 @@ public class PlayerStats : MonoBehaviour
     }
     public void TimerReset()
     {
-        regenStamina = true;
+        timer = 0;
     }
 }

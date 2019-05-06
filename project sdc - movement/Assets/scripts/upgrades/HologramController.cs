@@ -57,11 +57,11 @@ public class HologramController : MonoBehaviour
         if (Vector3.Distance(player.position, target.position) > minDistance && Vector3.Distance(player.position, target.position) < maxDistance && hit.rigidbody == GameObject.Find("Hologram"))
         {
             gameObject.GetComponent<Renderer>().sharedMaterial = youCanShootThere;
-            if (Input.GetKeyDown("space") && hologramInScene == false)
+            if (Input.GetKeyDown("space") && hologramInScene == false && GameObject.Find("HologramTarget").GetComponent<MeshRenderer>().enabled == false)
             {
                 hologramInScene = true;
                 playerStats.regenStamina = false;
-                //playerStats.TimerReset();
+                playerStats.TimerReset();
                 playerStats.energy -= hologramDepletion;
                 timer = 0;
                 playerMovement.active = false;
@@ -69,7 +69,7 @@ public class HologramController : MonoBehaviour
                 //GameObject.Find("HolographicPlayer").GetComponent<BoxCollider>().enabled = true;
                 Instantiate(hologramPrefab, hologramSpawnPoint.position, Quaternion.identity);
                 GameObject.Find("HologramTarget").GetComponent<MeshRenderer>().enabled = false;
-                playerStats.Invoke("TimerReset", playerStats.regainDelay);
+                //playerStats.Invoke("TimerReset", playerStats.regainDelay);
             }
         }
         else

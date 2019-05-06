@@ -33,6 +33,7 @@ public class ShieldController : MonoBehaviour
             if (playerStats.energy < 30)
             {
                 playerStats.energy = 30;
+                playerStats.TimerReset();
             }
         }
     }

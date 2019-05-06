@@ -13,6 +13,7 @@ public class ExplodingTaserController : MonoBehaviour
         playerMovement = GameObject.Find("player").GetComponent<PlayerMovement>();
         hologramController = GameObject.Find("HologramTarget").GetComponent<HologramController>();
         playerStats = GameObject.Find("player").GetComponent<PlayerStats>();
+
     }
     void Update()
     {
@@ -23,8 +24,8 @@ public class ExplodingTaserController : MonoBehaviour
             hologramController.HologrameMovement = false;
             playerMovement.active = false;
             playerStats.regenStamina = false;
-            playerStats.Invoke("TimerReset", playerStats.regainDelay);
-            //playerStats.TimerReset();
+            //playerStats.Invoke("TimerReset", playerStats.regainDelay);
+            playerStats.TimerReset();
             GameObject.Find("ExplodingTaser").GetComponent<ExplodingTaserController>().enabled = false;
         }
     }

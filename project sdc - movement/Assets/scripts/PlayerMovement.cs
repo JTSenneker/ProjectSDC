@@ -50,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
             playerStats.regenStamina = false;
             if (upgradeList.currentUpgrade != 1)
             {
-                playerStats.Invoke("TimerReset", playerStats.regainDelay);
+                //playerStats.Invoke("TimerReset", playerStats.regainDelay);
+                playerStats.TimerReset();
             }
             print("active = "+active);
             if (active)
@@ -108,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift) && playerStats.energy > playerStats.lowestenergy && crouch == false)
             {
                 playerStats.regenStamina = false;
-               // playerStats.TimerReset();
+                playerStats.TimerReset();
                 running = true;
                 currentSpeed = runSpeed;
                 playerStats.energy -= energyDepletion * Time.deltaTime;
@@ -116,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     playerStats.energy = 30;
                 }
-                playerStats.Invoke("TimerReset", playerStats.regainDelay);
+                //playerStats.Invoke("TimerReset", playerStats.regainDelay);
             }
         }
         else
