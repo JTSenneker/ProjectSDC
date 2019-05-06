@@ -8,6 +8,6 @@ public class ExitShop : MonoBehaviour
 {
     void OnClick()
     {
-        SceneManager.LoadScene(sceneName: "Inventory");
+        SceneManager.LoadScene(sceneName: "testing area");
     }
 }

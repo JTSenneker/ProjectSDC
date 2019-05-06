@@ -1272,7 +1272,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 371343933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee027f84fbf008c4e80e5c1731f9e27e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a5e4677cdb992b42a4c4cd2a6844fef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   taserLight: {fileID: 21300000, guid: 88a706d29eccf8847b808567721752be, type: 3}
@@ -2365,7 +2365,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 923209056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e88e14b4550f19840951762fa9e03493, type: 3}
+  m_Script: {fileID: 11500000, guid: 637706ee490ab98419f9539a71efb446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &923209058
