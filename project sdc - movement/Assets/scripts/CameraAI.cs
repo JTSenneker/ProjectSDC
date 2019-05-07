@@ -72,7 +72,7 @@ public class CameraAI : MonoBehaviour
                     nav.speed = lungeSpeed;
                 }
             }
-            else if (islunging==true&& Vector3.Distance(transform.position, Lungespot) < .65f)
+            else if (islunging==true&& Vector3.Distance(transform.position, Lungespot) < .7f)
             {
                 
                 lungetimer += Time.deltaTime;
@@ -81,7 +81,6 @@ public class CameraAI : MonoBehaviour
                 if (lungetimer>= waitAfterLunge)
                 {
                     islunging = false;
-                    Debug.Log("resume chase");
                     Lungespot = wallSpot;
                     nav.speed = basespeed;
                     lungetimer = 0;
@@ -105,7 +104,6 @@ public class CameraAI : MonoBehaviour
 
         if (Vector3.Distance(LastSighting,wallSpot)<.05f)
         {
-            
             if (Vector3.Distance(transform.position, wallSpot) < .15f)
             {
                 float angle = Mathf.Sin(Time.time) * lookSway+LookAverageDir;
@@ -114,7 +112,6 @@ public class CameraAI : MonoBehaviour
             }
             else
             {
-
                 nav.SetDestination(wallSpot);
             }
 
@@ -153,7 +150,6 @@ public class CameraAI : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
-        
         if (other.gameObject.tag == ("Guard") && this.gameObject.tag==("ChasingcamGuard"))
         {
             other.gameObject.GetComponent<GuardAIv2>().LastSighting = LastSighting;
@@ -167,57 +163,45 @@ public class CameraAI : MonoBehaviour
     {
         if (other.gameObject.tag == ("Player")|| other.gameObject.tag == ("holoPlayer"))
         {
-
             Vector3 direction = other.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
             if (angle <= fieldOfViewAngle * .5f)
             {
-
                 RaycastHit hit;
                 C_Collider.enabled = false;
                 B_Collider.enabled = false;
                 Orb_Collider.enabled = false;
                 if (Physics.Raycast(transform.position, direction.normalized, out hit, sightdistance))
                 {
-
                     if (hit.collider.gameObject.tag == ("Player"))
                     {
-
-                        
                         LastSighting = player.position;
                         if (Vector3.Distance(transform.position, wallSpot) < .15f)
                         {
                             Lungespot = LastSighting;
                         }
-                        
                         Orb_Collider.enabled = true;
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
                         ischasing = true;
-
                     }
                     else if (hit.collider.gameObject.tag == ("holoPlayer"))
                     {
-
-                        
                         LastSighting = hit.collider.gameObject.transform.position;
                         if (Vector3.Distance(transform.position, wallSpot) < .15f)
                         {
                             Lungespot = LastSighting;
                         }
-                        
                         Orb_Collider.enabled = true;
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
                         ischasing = true;
-
                     }
                     else
                     {
                         Orb_Collider.enabled = false;
                         C_Collider.enabled = true;
                         B_Collider.enabled = true;
-
                     }
                 }
                 else
@@ -227,10 +211,6 @@ public class CameraAI : MonoBehaviour
                     B_Collider.enabled = true;
                 }
             }
-            
-
         }
-       
     }
-
 }

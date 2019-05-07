@@ -110,13 +110,11 @@ public class playertestpickandpush : MonoBehaviour
                         Destroy(hit.collider.gameObject);
                         //C_Collider.enabled = true;
                         B_Collider.enabled = true;
-
+                        PointManager.points++;
                     }
-                    
                 }
                 else
                 {
-
                     //C_Collider.enabled = true;
                     B_Collider.enabled = true;
                 }
@@ -130,21 +128,17 @@ public class playertestpickandpush : MonoBehaviour
     {
         if (other.gameObject.tag == ("Pushable"))
         {
-            
             Vector3 direction = other.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
             if (angle <= fieldOfViewAngle * .5f)
             {
-
                 RaycastHit hit;
                 //C_Collider.enabled = false;
                 B_Collider.enabled = false;
                 if (Physics.Raycast(transform.position, direction.normalized, out hit, pickupRange))
                 {
-
                     if (hit.collider.gameObject.tag == ("Pushable"))
                     {
-
                         Vector3 movement = this.GetComponent<PlayerMovement>().movement;
                         other.attachedRigidbody.AddForce(movement);
                         //C_Collider.enabled = true;
@@ -153,7 +147,6 @@ public class playertestpickandpush : MonoBehaviour
                     }
                     else
                     {
-
                        //C_Collider.enabled = true;
                         B_Collider.enabled = true;
                         Pushing = false;
@@ -161,10 +154,8 @@ public class playertestpickandpush : MonoBehaviour
                 }
                 else
                 {
-
                     //C_Collider.enabled = true;
                     B_Collider.enabled = true;
-
                 }
                 //C_Collider.enabled = true;
                 B_Collider.enabled = true;

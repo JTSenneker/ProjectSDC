@@ -324,7 +324,7 @@ public class GuardAIv2 : MonoBehaviour
                         }
                         if (hit.collider.gameObject.tag == ("Player") && hit.collider.gameObject.tag != ("Pushable"))
                         {
-                            if (Vector3.Distance(transform.position, hit.transform.position) < 2.05f && angle <= shootangle * .5f)
+                            if (Vector3.Distance(transform.position, hit.transform.position) < 1.55f && angle <= shootangle * .5f)
                             {
                                 nav.speed = 0;
                                 nav.SetDestination(transform.position);
@@ -368,25 +368,28 @@ public class GuardAIv2 : MonoBehaviour
                         else if (hit.collider.gameObject.tag == ("holoPlayer"))
                         {
                             atplayer = false;
-                            Debug.Log("holosight");
                             ischasing = true;
                             LastSighting = other.gameObject.transform.position;
                             if (Physics.Raycast(transform.position, direction.normalized, out hit, Meleedistance) && angle <= Meleeangle * .5f)
                             {
                                 ismelee = true;
                                 isshoot = false;
+                                Destroy(hit.collider.gameObject);
                             }
                             else if (Physics.Raycast(transform.position, direction.normalized, out hit, shootdistance) && angle <= shootangle * .5f)
                             {
+                              
                                 if (Physics.Raycast(transform.position, direction.normalized, out hit, Meleedistance))
                                 {
                                     ismelee = true;
                                     isshoot = false;
+                                    Destroy(hit.collider.gameObject);
                                 }
                                 else
                                 {
                                     isshoot = true;
                                     ismelee = false;
+                                    targetpoint = player.position;
                                 }
                             }
                             else
