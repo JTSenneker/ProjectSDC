@@ -7,26 +7,36 @@ public class ExplodingTaserController : MonoBehaviour
     PlayerStats playerStats;
     PlayerMovement playerMovement;
     HologramController hologramController;// this is reffered to as the 'hologramcontroller' but has nothing specific to do with the hologram and its only function is to stop the play from moving.
+    public Animator anim;
     public int explodingTaserDepletion;
     void Start()
     {
         playerMovement = GameObject.Find("player").GetComponent<PlayerMovement>();
         hologramController = GameObject.Find("HologramTarget").GetComponent<HologramController>();
         playerStats = GameObject.Find("player").GetComponent<PlayerStats>();
-
+        anim = GameObject.Find("player").GetComponent<Animator>();
     }
     void Update()
     {
         {
             hologramController.HologrameMovement = true;
             playerStats.energy -= explodingTaserDepletion;
-            /*need to add animation with hit box activation*/
-            hologramController.HologrameMovement = false;
-            playerMovement.active = false;
-            playerStats.regenStamina = false;
-            //playerStats.Invoke("TimerReset", playerStats.regainDelay);
+            anim.SetTrigger("punchDown");
+            //hologramController.HologrameMovement = false;
+            //playerStats.regenStamina = false;
+            //playerMovement.active = false;
             playerStats.TimerReset();
-            GameObject.Find("ExplodingTaser").GetComponent<ExplodingTaserController>().enabled = false;
+            Invoke("disable", 1);
+        
+            //GameObject.Find("ExplodingTaser").GetComponent<ExplodingTaserController>().enabled = false;
         }
+    }
+    void LateUpdate()
+    {
+        //GameObject.Find("ExplodingTaser").GetComponent<ExplodingTaserController>().enabled = false;
+    }
+    void disable()
+    {
+        enabled = false;
     }
 }

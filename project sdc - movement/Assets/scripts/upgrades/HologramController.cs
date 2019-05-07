@@ -57,7 +57,7 @@ public class HologramController : MonoBehaviour
         if (Vector3.Distance(player.position, target.position) > minDistance && Vector3.Distance(player.position, target.position) < maxDistance && hit.rigidbody == GameObject.Find("Hologram"))
         {
             gameObject.GetComponent<Renderer>().sharedMaterial = youCanShootThere;
-            if (Input.GetKeyDown("space") && hologramInScene == false && GameObject.Find("HologramTarget").GetComponent<MeshRenderer>().enabled == false)
+            if (Input.GetKeyDown("space") && hologramInScene == false && GameObject.Find("HologramTarget").GetComponent<MeshRenderer>().enabled == true)
             {
                 hologramInScene = true;
                 playerStats.regenStamina = false;
