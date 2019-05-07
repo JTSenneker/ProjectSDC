@@ -678,7 +678,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Focused Lethality - All active abilities from the Aggresion
+            m_StringArgument: Focused Lethality - All active abilities from the Aggression
               tree and the taser now recharge twice as fast
             m_BoolArgument: 0
           m_CallState: 2
