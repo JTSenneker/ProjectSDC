@@ -6,6 +6,12 @@ TagManager:
   tags:
   - holoPlayer
   - holoShield
+  - Wall
+  - Pushable
+  - Pickup
+  - Guard
+  - ChasingGuard
+  - ChasingcamGuard
   layers:
   - Default
   - TransparentFX
