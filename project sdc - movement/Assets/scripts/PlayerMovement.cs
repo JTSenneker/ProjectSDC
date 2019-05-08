@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
             active = false;
             upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(active, activeShield);
         }
-        if (Input.GetKeyDown("r") && GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled == false)
+        if (Input.GetButtonDown("Abutton") && GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled == false)
         {
             playerStats.regenStamina = false;
             if (upgradeList.currentUpgrade != 1)
@@ -88,10 +88,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") || Input.GetKey("w"))
+            //if (Input.Getbutton("Vertical") || Input.GetButton("Horizontal"))
             {
-                float h = Input.GetAxisRaw("Horizontal");
-                float v = Input.GetAxisRaw("Vertical");
+                float h = Input.GetAxis("Horizontal");
+                float v = Input.GetAxis("Vertical");
                 move(h, v);
                 currentSpeed = walkSpeed;
             }
@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentSpeed = crouchSpeed;
             }
-            if (Input.GetKey(KeyCode.LeftShift) && playerStats.energy > playerStats.lowestenergy && crouch == false)
+            if (Input.GetButton("Xbutton") && playerStats.energy > playerStats.lowestenergy && crouch == false)
             {
                 playerStats.regenStamina = false;
                 playerStats.TimerReset();
