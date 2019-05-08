@@ -19,7 +19,7 @@ public class ShieldController : MonoBehaviour
     void Update()
     {
         transform.position = shieldPoint.position;
-        if (Input.GetKey("j") || Input.GetKey("k") || Input.GetKey("l") || Input.GetKey("i"))
+        //if (Input.GetKey("j") || Input.GetKey("k") || Input.GetKey("l") || Input.GetKey("i"))
         {
             float h = Input.GetAxisRaw("horizontal");
             float v = Input.GetAxisRaw("vertical");
@@ -33,6 +33,7 @@ public class ShieldController : MonoBehaviour
             if (playerStats.energy < 30)
             {
                 playerStats.energy = 30;
+                playerStats.TimerReset();
             }
         }
     }

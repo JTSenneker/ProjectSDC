@@ -37,18 +37,20 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        
-        
+
+        Debug.Log(upgradeList.currentUpgrade);
         if (playerStats.energy <= 30 && active && (upgradeList.upgrades[upgradeList.currentUpgrade] == upgradeList.upgrades[shield] || upgradeList.upgrades[upgradeList.currentUpgrade] == upgradeList.upgrades[invisibility]))
         {
             playerStats.TimerReset();
             active = false;
             upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(active, activeShield);
         }
-        if (Input.GetKeyDown("r") && GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled == false)
+        if (Input.GetButtonDown("Xbutton") && GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled == false)
         {
-            if (upgradeList.upgrades[upgradeList.currentUpgrade] != upgradeList.upgrades[hologram])
+            playerStats.regenStamina = false;
+            if (upgradeList.currentUpgrade != 1)
             {
+                //playerStats.Invoke("TimerReset", playerStats.regainDelay);
                 playerStats.TimerReset();
             }
             print("active = "+active);
@@ -77,26 +79,23 @@ public class PlayerMovement : MonoBehaviour
                 crouch = false;
             }
         }
-    }
-    void FixedUpdate()
-    {
-        if (hologramController.HologrameMovement==true)
+        if (hologramController.HologrameMovement == true)
         {
-            print("player can not move while aiming hologram");
+            print("player can not move while aiming hologram or during exploding taser");
         }
         else
         {
-            if (Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") || Input.GetKey("w"))
+            //if (Input.Getbutton("Vertical") || Input.GetButton("Horizontal"))
             {
-                float h = Input.GetAxisRaw("Horizontal");
-                float v = Input.GetAxisRaw("Vertical");
+                float h = Input.GetAxis("Horizontal");
+                float v = Input.GetAxis("Vertical");
                 move(h, v);
                 currentSpeed = walkSpeed;
             }
             running = false;
         }
     }
-    void move(float h,float v)
+    void move(float h, float v)
     {
         if (playerStats.energy >= 30)
         {
@@ -104,8 +103,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentSpeed = crouchSpeed;
             }
-            if (Input.GetKey(KeyCode.LeftShift) && playerStats.energy > playerStats.lowestenergy && crouch == false)
+            if (Input.GetButton("rightTrigger") && playerStats.energy > playerStats.lowestenergy && crouch == false)
             {
+                playerStats.regenStamina = false;
                 playerStats.TimerReset();
                 running = true;
                 currentSpeed = runSpeed;
@@ -114,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     playerStats.energy = 30;
                 }
+                //playerStats.Invoke("TimerReset", playerStats.regainDelay);
             }
         }
         else
@@ -122,8 +123,9 @@ public class PlayerMovement : MonoBehaviour
         }
         movement.Set(h, 0f, v);
         movement = movement.normalized * currentSpeed * Time.deltaTime;
-        rb.MovePosition(transform.position + movement);
-        transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(movement),rotate);
+        //rb.MovePosition(transform.position + movement);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), rotate);
         transform.Translate(movement * currentSpeed * Time.deltaTime, Space.World);
     }
 }
+    
