@@ -1143,5 +1143,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2759301618238325727, guid: a13d7b50353e6004587ac0021053ad78,
+        type: 3}
+      propertyPath: walkSpeed
+      value: 18
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a13d7b50353e6004587ac0021053ad78, type: 3}

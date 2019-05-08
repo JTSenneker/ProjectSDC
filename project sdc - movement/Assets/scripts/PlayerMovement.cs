@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
             active = false;
             upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(active, activeShield);
         }
-        if (Input.GetButtonDown("Abutton") && GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled == false)
+        if (Input.GetButtonDown("Xbutton") && GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled == false)
         {
             playerStats.regenStamina = false;
             if (upgradeList.currentUpgrade != 1)
@@ -79,9 +79,6 @@ public class PlayerMovement : MonoBehaviour
                 crouch = false;
             }
         }
-    }
-    void FixedUpdate()
-    {
         if (hologramController.HologrameMovement == true)
         {
             print("player can not move while aiming hologram or during exploding taser");
@@ -98,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
             running = false;
         }
     }
-    void move(float h,float v)
+    void move(float h, float v)
     {
         if (playerStats.energy >= 30)
         {
@@ -106,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentSpeed = crouchSpeed;
             }
-            if (Input.GetButton("Xbutton") && playerStats.energy > playerStats.lowestenergy && crouch == false)
+            if (Input.GetButton("rightTrigger") && playerStats.energy > playerStats.lowestenergy && crouch == false)
             {
                 playerStats.regenStamina = false;
                 playerStats.TimerReset();
@@ -126,8 +123,9 @@ public class PlayerMovement : MonoBehaviour
         }
         movement.Set(h, 0f, v);
         movement = movement.normalized * currentSpeed * Time.deltaTime;
-        rb.MovePosition(transform.position + movement);
-        transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(movement),rotate);
+        //rb.MovePosition(transform.position + movement);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), rotate);
         transform.Translate(movement * currentSpeed * Time.deltaTime, Space.World);
     }
 }
+    

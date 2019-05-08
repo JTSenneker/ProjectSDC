@@ -40,12 +40,21 @@ public class UpgradeList : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q) && !playerMovement.active)
+        if(Input.GetButtonDown("upgradeUp") && !playerMovement.active)
         {
             currentUpgrade++;
             if(currentUpgrade>=upgradeCount)
             {
                 currentUpgrade = 0;
+            }
+            text.text = yourUpgrades[currentUpgrade];
+        }
+        if (Input.GetButtonDown("upgradeDown") && !playerMovement.active)
+        {
+            currentUpgrade--;
+            if (currentUpgrade < 0)
+            {
+                currentUpgrade = 4;
             }
             text.text = yourUpgrades[currentUpgrade];
         }
