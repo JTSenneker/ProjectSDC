@@ -445,7 +445,7 @@ public class ShopController : MonoBehaviour
     public void ReturnToGame()
     {
         PointManager.points = funds;
-        SceneManager.LoadScene(sceneName: "Inventory");
+        SceneManager.LoadScene(sceneName: "testing area");
     }
 
     void SetBankText()
