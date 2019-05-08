@@ -15,7 +15,7 @@ public class playertestpickandpush : MonoBehaviour
     
 
     private Collider B_Collider;
-    private Collider C_Collider; // Only call if deside to add a capsule collider
+    private Collider C_Collider; 
     
 
 
@@ -28,13 +28,13 @@ public class playertestpickandpush : MonoBehaviour
     {
         Rb = GetComponent<Rigidbody>();
         B_Collider = GetComponent<BoxCollider>();
-        //C_Collider = GetComponent<CapsuleCollider>();
+        C_Collider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("p") == false)
+        if (Input.GetButtonDown("Ybutton") == false)
         {
             Pushing = false;
         }
@@ -54,12 +54,12 @@ public class playertestpickandpush : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyDown("e"))
+        if (Input.GetButtonDown("Abutton"))
         {
             detect(other);
-
+            
         }
-        if (other.gameObject.tag == "Pushable" && Input.GetKey("p"))
+        if (other.gameObject.tag == "Pushable" && Input.GetButtonDown("Ybutton"))
         {
             push(other);
         }
@@ -67,12 +67,12 @@ public class playertestpickandpush : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if ( Input.GetKeyDown("e"))
+        if (Input.GetButtonDown("Abutton"))
         {
             inPickUpRange = true;
             detect(other);
         }
-        if (other.gameObject.tag == "Pushable" && Input.GetKey("p"))
+        if (other.gameObject.tag == "Pushable" && Input.GetButtonDown("Ybutton"))
         {
            
             push(other);
@@ -99,26 +99,26 @@ public class playertestpickandpush : MonoBehaviour
             {
 
                 RaycastHit hit;
-               // C_Collider.enabled = false;
+                C_Collider.enabled = false;
                 B_Collider.enabled = false;
                 if (Physics.Raycast(transform.position, direction.normalized, out hit, pickupRange))
                 {
-
+                    
                     if (hit.collider.gameObject.tag == ("Pickup")&& hit.collider.gameObject.tag != ("Guard"))
                     {
                         Debug.Log("Pickup");
                         Destroy(hit.collider.gameObject);
-                        //C_Collider.enabled = true;
+                        C_Collider.enabled = true;
                         B_Collider.enabled = true;
                         PointManager.points++;
                     }
                 }
                 else
                 {
-                    //C_Collider.enabled = true;
+                    C_Collider.enabled = true;
                     B_Collider.enabled = true;
                 }
-               // C_Collider.enabled = true;
+               C_Collider.enabled = true;
                 B_Collider.enabled = true;
             }
         }
@@ -133,7 +133,7 @@ public class playertestpickandpush : MonoBehaviour
             if (angle <= fieldOfViewAngle * .5f)
             {
                 RaycastHit hit;
-                //C_Collider.enabled = false;
+                C_Collider.enabled = false;
                 B_Collider.enabled = false;
                 if (Physics.Raycast(transform.position, direction.normalized, out hit, pickupRange))
                 {
@@ -141,23 +141,23 @@ public class playertestpickandpush : MonoBehaviour
                     {
                         Vector3 movement = this.GetComponent<PlayerMovement>().movement;
                         other.attachedRigidbody.AddForce(movement);
-                        //C_Collider.enabled = true;
+                        C_Collider.enabled = true;
                         B_Collider.enabled = true;
                         Pushing = true;
                     }
                     else
                     {
-                       //C_Collider.enabled = true;
+                       C_Collider.enabled = true;
                         B_Collider.enabled = true;
                         Pushing = false;
                     }
                 }
                 else
                 {
-                    //C_Collider.enabled = true;
+                    C_Collider.enabled = true;
                     B_Collider.enabled = true;
                 }
-                //C_Collider.enabled = true;
+                C_Collider.enabled = true;
                 B_Collider.enabled = true;
             }
         }

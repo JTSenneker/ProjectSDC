@@ -35,7 +35,7 @@ public class Pushable : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         
-        if (other.gameObject.tag == ("Player") && Input.GetKey("p"))
+        if (other.gameObject.tag == ("Player") && Input.GetButtonDown("Ybutton"))
         {
             Rb.isKinematic = false;
         }
