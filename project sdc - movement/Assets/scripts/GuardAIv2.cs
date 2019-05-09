@@ -168,7 +168,6 @@ public class GuardAIv2 : MonoBehaviour
         {
             if (isshoot == true)
             {
-
                 Shoot();
                 stats.timer = 0;
                 isshoot = false;
@@ -326,13 +325,19 @@ public class GuardAIv2 : MonoBehaviour
                         {
                             if (Vector3.Distance(transform.position, hit.transform.position) < 1.55f && angle <= shootangle * .5f)
                             {
-                                nav.speed = 0;
+                                if (stats.energy != 0)
+                                {
+                                    nav.speed = 0;
+                                }
+                                else
+                                {
+                                    nav.speed = speed;
+                                }
                                 nav.SetDestination(transform.position);
                             }
                             else
                             {
                                 nav.speed = speed;
-
                             }
 
                             ischasing = true;
