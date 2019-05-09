@@ -5,6 +5,8 @@ using UnityEngine;
 public class InvisibilityControllor : MonoBehaviour
 {
     PlayerStats playerStats;
+    public Material material;
+
     public float invisibilityDepletion;
     void Awake()
     {
@@ -14,6 +16,7 @@ public class InvisibilityControllor : MonoBehaviour
     {
         if (GameObject.Find("InvisibilityCloak").GetComponent<InvisibilityControllor>().enabled == true)
         {
+            GameObject.Find("player").GetComponent<Renderer>().sharedMaterial = material;
             playerStats.energy -= invisibilityDepletion * Time.deltaTime;
             if (playerStats.energy < 30)
             {

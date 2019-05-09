@@ -7,12 +7,15 @@ public class PlayerMovement : MonoBehaviour
     PlayerStats playerStats;
     UpgradeList upgradeList;
     HologramController hologramController;
+    public Material material;
     public Vector3 movement;
     public float rotate;
     public float walkSpeed;
     public float runSpeed;
     public float crouchSpeed;
     public float energyDepletion;
+    public float h;
+    public float v;
     private float currentSpeed;
     public float fatigueSpeed;
     private int hologram = 1;
@@ -44,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
             playerStats.TimerReset();
             active = false;
             upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(active, activeShield);
+            GameObject.Find("player").GetComponent<Renderer>().sharedMaterial = material;
         }
         if (Input.GetButtonDown("Xbutton") && GameObject.Find("HolographicPlayer").GetComponent<MeshRenderer>().enabled == false)
         {
@@ -59,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
                 active = false;
                 print("Turn off");
                 upgradeList.upgrades[upgradeList.currentUpgrade].UseUpgrade(false, activeShield);
-                
+                GameObject.Find("player").GetComponent<Renderer>().sharedMaterial = material;
             }
             else
             {
@@ -68,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
                 active = true;
             }
         }
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetButtonDown("Ybutton"))
         {
             if (crouch == false)
             {
@@ -87,8 +91,8 @@ public class PlayerMovement : MonoBehaviour
         {
             //if (Input.Getbutton("Vertical") || Input.GetButton("Horizontal"))
             {
-                float h = Input.GetAxis("Horizontal");
-                float v = Input.GetAxis("Vertical");
+                h = Input.GetAxis("Horizontal");
+                v = Input.GetAxis("Vertical");
                 move(h, v);
                 currentSpeed = walkSpeed;
             }
@@ -127,5 +131,6 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), rotate);
         transform.Translate(movement * currentSpeed * Time.deltaTime, Space.World);
     }
+    
 }
     
