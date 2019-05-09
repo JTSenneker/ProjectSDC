@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Victory : MonoBehaviour
 {
-    public void Victory()
+    public void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene("Victory");
+        if(other.tag == "Player")SceneManager.LoadScene("Victory");
     }
 }

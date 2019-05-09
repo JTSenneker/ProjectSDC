@@ -5,8 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour
 {
-    public void Restart()
+
+    public void Update()
     {
-        SceneManagement.LoadScene("Demo Level");
+        if (Input.anyKeyDown)
+        {
+            LevelRestart();
+        }
+    }
+    public void LevelRestart()
+    {
+        SceneManager.LoadScene("Demo Level");
     }
 }

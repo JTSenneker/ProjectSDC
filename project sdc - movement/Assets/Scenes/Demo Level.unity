@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2204,6 +2204,20 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3fed34d8b73e87e428e84db4f088ad4f, type: 2}
+    - target: {fileID: 6313491528162130843, guid: 096c8a4f22a5c1a4c804a5a28aac7ee0,
+        type: 3}
+      propertyPath: material
+      value: 
+      objectReference: {fileID: 2100000, guid: 3fed34d8b73e87e428e84db4f088ad4f, type: 2}
+    - target: {fileID: 187476440, guid: 096c8a4f22a5c1a4c804a5a28aac7ee0, type: 3}
+      propertyPath: material
+      value: 
+      objectReference: {fileID: 2100000, guid: fac384553903913448afe914c4a3a332, type: 2}
+    - target: {fileID: 6231731114568490713, guid: 096c8a4f22a5c1a4c804a5a28aac7ee0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1739781411244220872, guid: 096c8a4f22a5c1a4c804a5a28aac7ee0,
         type: 3}
       propertyPath: player
@@ -6414,6 +6428,26 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4c47474f0572e75478f9c33953f901bf, type: 2}
+    - target: {fileID: 400024, guid: d0dcf158005e2e940b8771c34a2b4c93, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 400024, guid: d0dcf158005e2e940b8771c34a2b4c93, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 400024, guid: d0dcf158005e2e940b8771c34a2b4c93, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300024, guid: d0dcf158005e2e940b8771c34a2b4c93, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 530cf2c3c7b06724dbbfb064e8e60c36, type: 2}
+    - target: {fileID: 2300052, guid: d0dcf158005e2e940b8771c34a2b4c93, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 34822aac26c35c546964ce68ac82e9ad, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0dcf158005e2e940b8771c34a2b4c93, type: 3}
 --- !u!1 &1383188451 stripped
@@ -6808,20 +6842,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300040, guid: d0dcf158005e2e940b8771c34a2b4c93, type: 3}
---- !u!64 &1383188491
-MeshCollider:
+--- !u!65 &1383188491
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383188470}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300056, guid: d0dcf158005e2e940b8771c34a2b4c93, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.5206738, y: 0.6921901, z: 1.0939336}
+  m_Center: {x: -0.0000019073486, y: -0.00000023841855, z: 0.54696655}
 --- !u!64 &1383188492
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6836,6 +6869,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300058, guid: d0dcf158005e2e940b8771c34a2b4c93, type: 3}
+--- !u!114 &1383188556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383188470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd052909648be784fb124f6776474088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1420636207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7363,7 +7408,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 370609211}
   target: {fileID: 1439386107}
+  hologramSpawnPoint: {fileID: 0}
   HologrameMovement: 0
+  hologramInScene: 0
   aimSpeed: 16
   maxDistance: 11
   minDistance: 3
@@ -7372,6 +7419,7 @@ MonoBehaviour:
   timer: 0
   toClose: {fileID: 2100000, guid: 397376060d6737b44badda4192de35f8, type: 2}
   youCanShootThere: {fileID: 2100000, guid: d93948c775a64b047a874df92be37c59, type: 2}
+  hologramPrefab: {fileID: 0}
 --- !u!54 &1439386104
 Rigidbody:
   m_ObjectHideFlags: 0
