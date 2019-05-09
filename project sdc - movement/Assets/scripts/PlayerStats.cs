@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerStats : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class PlayerStats : MonoBehaviour
     public float regainDelay;
     float timer;
     PlayerMovement playerMovement;
-
+   
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -33,6 +35,11 @@ public class PlayerStats : MonoBehaviour
         {
             energy = 0;
         }
+
+        if (energy == 0)
+        {
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
     public void HurtPlayer()
     {
@@ -42,5 +49,10 @@ public class PlayerStats : MonoBehaviour
     public void TimerReset()
     {
         timer = 0;
+    }
+
+    public void DeadPlayer()
+    {
+      
     }
 }

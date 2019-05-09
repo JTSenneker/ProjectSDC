@@ -6,6 +6,7 @@ TagManager:
   tags:
   - holoPlayer
   - holoShield
+  - Enemy
   layers:
   - Default
   - TransparentFX
