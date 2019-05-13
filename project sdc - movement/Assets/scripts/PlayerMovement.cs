@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            //if (Input.Getbutton("Vertical") || Input.GetButton("Horizontal"))
+            //if (Input.GetButton("Vertical") || Input.GetButton("Horizontal"))
             {
                 h = Input.GetAxis("Horizontal");
                 v = Input.GetAxis("Vertical");
