@@ -249,7 +249,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0, z: 0}
   targetWaypoints: []
   targetpoint: {x: 0, y: 0, z: 0}
-  stuntime: 0
+  stuntime: 5
   stuntimer: 0
   stunned: 0
   Boxdistance: 3
@@ -4864,7 +4864,7 @@ ParticleSystem:
 --- !u!199 &2486941459375322039
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

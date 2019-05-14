@@ -12,6 +12,7 @@ TagManager:
   - Guard
   - ChasingGuard
   - ChasingcamGuard
+  - invisPlayer
   layers:
   - Default
   - TransparentFX

@@ -14,11 +14,13 @@ public class InvisibilityUpgrade : Upgrade
             if (active)
             {
                 GameObject.Find("InvisibilityCloak").GetComponent<InvisibilityControllor>().enabled = true;
+                GameObject.Find("player").tag = "invisPlayer";
                 Debug.Log("invisibility cloak is on");
             }
             else if (active == false)
             {
                 GameObject.Find("InvisibilityCloak").GetComponent<InvisibilityControllor>().enabled = false;
+                GameObject.Find("player").tag = "Player";
                 Debug.Log("invisibility cloak is off");
             }
         }

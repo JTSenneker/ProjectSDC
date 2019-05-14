@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1789,6 +1789,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4c47474f0572e75478f9c33953f901bf, type: 2}
+    - target: {fileID: 2300070, guid: 00e3223791fa8ab4983e6a5173bae1d4, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300070, guid: 00e3223791fa8ab4983e6a5173bae1d4, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100002, guid: 00e3223791fa8ab4983e6a5173bae1d4, type: 3}
+    - target: {fileID: 2300070, guid: 00e3223791fa8ab4983e6a5173bae1d4, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100002, guid: 00e3223791fa8ab4983e6a5173bae1d4, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e3223791fa8ab4983e6a5173bae1d4, type: 3}
 --- !u!1 &480070531 stripped
@@ -5608,6 +5620,11 @@ PrefabInstance:
       propertyPath: targetWaypoints.Array.data[4]
       value: 
       objectReference: {fileID: 1755906862}
+    - target: {fileID: 1216422524455828027, guid: b66d778561ae9bd4da7a4c9063eaa28e,
+        type: 3}
+      propertyPath: stuntime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5095158059119255970, guid: b66d778561ae9bd4da7a4c9063eaa28e,
         type: 3}
       propertyPath: m_Parameters.colorGradient.key0.g
@@ -5886,6 +5903,11 @@ PrefabInstance:
       propertyPath: targetWaypoints.Array.data[4]
       value: 
       objectReference: {fileID: 1755906862}
+    - target: {fileID: 1216422524455828027, guid: b66d778561ae9bd4da7a4c9063eaa28e,
+        type: 3}
+      propertyPath: stuntime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5095158059119255970, guid: b66d778561ae9bd4da7a4c9063eaa28e,
         type: 3}
       propertyPath: m_Parameters.colorGradient.key0.g
@@ -7850,6 +7872,11 @@ PrefabInstance:
       propertyPath: targetWaypoints.Array.data[4]
       value: 
       objectReference: {fileID: 1755906862}
+    - target: {fileID: 1216422524455828027, guid: b66d778561ae9bd4da7a4c9063eaa28e,
+        type: 3}
+      propertyPath: stuntime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5095158059119255970, guid: b66d778561ae9bd4da7a4c9063eaa28e,
         type: 3}
       propertyPath: m_Parameters.colorGradient.key0.g
